@@ -4,7 +4,7 @@ import br.com.contratei.dto.AuthenticationRequestDto;
 import br.com.contratei.dto.AuthenticationResponseDto;
 import br.com.contratei.dto.ConsumerUserDto;
 import br.com.contratei.dto.ProviderUserDto;
-import br.com.contratei.service.impl.UserDetailsServiceImpl;
+import br.com.contratei.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private LoginServiceImpl userDetailsService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDto authenticatioRequest) throws Exception {

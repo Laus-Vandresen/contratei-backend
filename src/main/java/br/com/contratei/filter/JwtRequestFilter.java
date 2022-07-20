@@ -1,6 +1,6 @@
 package br.com.contratei.filter;
 
-import br.com.contratei.service.impl.UserDetailsServiceImpl;
+import br.com.contratei.service.impl.LoginServiceImpl;
 import br.com.contratei.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +21,7 @@ import java.util.Objects;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private LoginServiceImpl userDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;

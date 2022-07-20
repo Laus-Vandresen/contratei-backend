@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +25,10 @@ public class ConsumerUserEntity {
     private String lastName;
     private String cpf;
     private String contactNumber;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="consumer_id")
+    private List<BugetEntity> bugets;
 
     public ConsumerUserEntity(ConsumerUserDto usuario) {
         this.email = usuario.getEmail();

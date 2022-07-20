@@ -1,7 +1,7 @@
 package br.com.contratei.config;
 
 import br.com.contratei.filter.JwtRequestFilter;
-import br.com.contratei.service.impl.UserDetailsServiceImpl;
+import br.com.contratei.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private LoginServiceImpl userDetailsService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;

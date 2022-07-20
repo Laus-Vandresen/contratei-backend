@@ -1,6 +1,7 @@
 package br.com.contratei.entity;
 
 import br.com.contratei.dto.ProviderUserDto;
+import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +26,11 @@ public class ProviderUserEntity {
     private String lastName;
     private String cpf;
     private String contactNumber;
-    private String descricao;
+    private String description;
     private Double kmWorkRange;
     private BigDecimal hourValue;
+    @Enumerated(EnumType.ORDINAL)
+    private ServiceTypeEnum serviceType;
 
     public ProviderUserEntity(ProviderUserDto usuario) {
         this.email = usuario.getEmail();
@@ -36,7 +39,7 @@ public class ProviderUserEntity {
         this.lastName = usuario.getLastName();
         this.cpf = usuario.getCpf();
         this.contactNumber = usuario.getContactNumber();
-        this.descricao = usuario.getDescricao();
+        this.description = usuario.getDescription();
         this.kmWorkRange = usuario.getKmWorkRange();
         this.hourValue = usuario.getHourValue();
     }

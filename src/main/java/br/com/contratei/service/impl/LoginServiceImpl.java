@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class LoginServiceImpl implements UserDetailsService {
 
     @Autowired
     private ConsumerUserRepository consumerUserRepository;
