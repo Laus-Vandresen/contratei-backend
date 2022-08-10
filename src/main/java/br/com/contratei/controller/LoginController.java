@@ -1,9 +1,6 @@
 package br.com.contratei.controller;
 
-import br.com.contratei.dto.AuthenticationRequestDto;
-import br.com.contratei.dto.AuthenticationResponseDto;
-import br.com.contratei.dto.ConsumerUserDto;
-import br.com.contratei.dto.ProviderUserDto;
+import br.com.contratei.dto.*;
 import br.com.contratei.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +21,16 @@ public class LoginController {
 
     @PostMapping("/create-consumer-user")
     public void createNewConsumerUser(@RequestBody ConsumerUserDto user) {
-        this.userDetailsService.createNewConsumerUser(user);
+        userDetailsService.createNewConsumerUser(user);
     }
 
     @PostMapping("/create-provider-user")
     public void createNewProviderUser(@RequestBody ProviderUserDto user) {
-        this.userDetailsService.createNewProviderUser(user);
+        userDetailsService.createNewProviderUser(user);
+    }
+
+    @GetMapping("/find-user")
+    public UserDto findUserByEmail(@RequestParam String email) {
+        return userDetailsService.findUserByEmail(email);
     }
 }
