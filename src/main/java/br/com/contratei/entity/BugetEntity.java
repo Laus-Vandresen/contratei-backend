@@ -39,6 +39,10 @@ public class BugetEntity {
     private LocalDate openingDate;
     private LocalDate completionDate;
 
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "consumer_id")
+    private ConsumerUserEntity consumer;
+
     public BugetEntity(BugetDto dto) {
         this.id = dto.getId();
         this.title = dto.getTitle();
@@ -49,5 +53,6 @@ public class BugetEntity {
         this.priority = dto.getPriority();
         this.openingDate = dto.getOpeningDate();
         this.completionDate = dto.getCompletionDate();
+        this.consumer = new ConsumerUserEntity(dto.getConsumer());
     }
 }

@@ -4,6 +4,7 @@ import br.com.contratei.dto.BugetDto;
 import br.com.contratei.entity.BugetEntity;
 import br.com.contratei.service.BugetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +17,13 @@ public class BugetController {
     @GetMapping
     public BugetEntity findById(@RequestParam Integer id) {
         return service.findById(id);
+    }
+
+    @GetMapping("/find-by-consumer")
+    public Page<BugetDto> findByConsumer(@RequestParam int page,
+                                         @RequestParam int size,
+                                         @RequestParam int consumerId) {
+        return service.findByConsumer(page, size, consumerId);
     }
 
     @PostMapping

@@ -30,12 +30,13 @@ public class ConsumerUserEntity {
     @JoinColumn(name="consumer_id")
     private List<BugetEntity> bugets;
 
-    public ConsumerUserEntity(ConsumerUserDto usuario) {
-        this.email = usuario.getEmail();
-        this.password = usuario.getPassword();
-        this.firstName = usuario.getFirstName();
-        this.lastName = usuario.getLastName();
-        this.cpf = usuario.getCpf();
-        this.contactNumber = usuario.getContactNumber();
+    public ConsumerUserEntity(ConsumerUserDto dto) {
+        this.id = dto.getId();
+        this.email = dto.getEmail();
+        this.password = dto.getPassword();
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+        this.cpf = dto.getCpf();
+        this.contactNumber = dto.getContactNumber();
     }
 }

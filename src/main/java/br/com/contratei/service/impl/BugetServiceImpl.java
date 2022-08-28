@@ -5,6 +5,9 @@ import br.com.contratei.entity.BugetEntity;
 import br.com.contratei.repository.BugetRepository;
 import br.com.contratei.service.BugetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,5 +24,10 @@ public class BugetServiceImpl implements BugetService {
     @Override
     public BugetEntity save(BugetDto dto) {
         return repository.save(new BugetEntity(dto));
+    }
+
+    @Override
+    public Page<BugetDto> findByConsumer(int page, int size, int consumerId) {
+        return repository.findByConsumer(PageRequest.of(page, size), consumerId);
     }
 }

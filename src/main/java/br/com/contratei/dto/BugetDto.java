@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +26,7 @@ public class BugetDto {
     private String description;
     private LocalDate openingDate;
     private LocalDate completionDate;
+    private ConsumerUserDto consumer;
 
     public BugetDto(BugetEntity entity) {
         this.id = entity.getId();
@@ -36,5 +38,6 @@ public class BugetDto {
         this.description = entity.getDescription();
         this.openingDate = entity.getOpeningDate();
         this.completionDate = entity.getCompletionDate();
+        this.consumer = Objects.nonNull(entity.getConsumer()) ? new ConsumerUserDto(entity.getConsumer()) : null;
     }
 }
