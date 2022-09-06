@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @Getter
 public class UserDto {
 
+    private int id;
     private String email;
     private String password;
     private String firstName;
@@ -25,6 +26,7 @@ public class UserDto {
     private Boolean isProvider;
 
     public UserDto(ConsumerUserEntity entity) {
+        this.id = entity.getId();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.firstName = entity.getFirstName();
@@ -35,6 +37,7 @@ public class UserDto {
     }
 
     public UserDto(ProviderUserEntity entity) {
+        this.id = entity.getId();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.firstName = entity.getFirstName();

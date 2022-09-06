@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Setter
 public class ProviderUserDto {
 
+    private int id;
     private String email;
     private String password;
     private String firstName;
@@ -25,6 +26,7 @@ public class ProviderUserDto {
     private BigDecimal hourValue;
 
     public ProviderUserDto(ProviderUserEntity entity) {
+        this.id = entity.getId();
         this.email = entity.getEmail();
         this.password = entity.getPassword();
         this.firstName = entity.getFirstName();

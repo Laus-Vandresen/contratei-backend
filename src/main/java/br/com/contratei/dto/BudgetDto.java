@@ -1,7 +1,7 @@
 package br.com.contratei.dto;
 
-import br.com.contratei.entity.BugetEntity;
-import br.com.contratei.enuns.BugetStatusEnum;
+import br.com.contratei.entity.BudgetEntity;
+import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.enuns.PriorityLevelEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
@@ -9,17 +9,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.security.Provider;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class BugetDto {
+public class BudgetDto {
 
     private int id;
     private String title;
-    private BugetStatusEnum status;
+    private BudgetStatusEnum status;
     private BigDecimal value;
     private PriorityLevelEnum priority;
     private ServiceTypeEnum serviceType;
@@ -27,8 +28,9 @@ public class BugetDto {
     private LocalDate openingDate;
     private LocalDate completionDate;
     private ConsumerUserDto consumer;
+    private ProviderUserDto provider;
 
-    public BugetDto(BugetEntity entity) {
+    public BudgetDto(BudgetEntity entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.status = entity.getStatus();
@@ -39,5 +41,6 @@ public class BugetDto {
         this.openingDate = entity.getOpeningDate();
         this.completionDate = entity.getCompletionDate();
         this.consumer = Objects.nonNull(entity.getConsumer()) ? new ConsumerUserDto(entity.getConsumer()) : null;
+        this.provider = Objects.nonNull(entity.getProvider()) ? new ProviderUserDto(entity.getProvider()) : null;
     }
 }

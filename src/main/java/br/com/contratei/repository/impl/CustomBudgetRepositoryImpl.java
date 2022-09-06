@@ -1,9 +1,9 @@
 package br.com.contratei.repository.impl;
 
-import br.com.contratei.dto.BugetDto;
-import br.com.contratei.entity.QBugetEntity;
+import br.com.contratei.dto.BudgetDto;
+import br.com.contratei.entity.QBudgetEntity;
 import br.com.contratei.entity.QConsumerUserEntity;
-import br.com.contratei.repository.CustomBugetRepository;
+import br.com.contratei.repository.CustomBudgetRepository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
@@ -13,22 +13,22 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class CustomBugetRepositoryImpl implements CustomBugetRepository {
+public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public Page<BugetDto> findByConsumer(Pageable page, int consumerId) {
-        final QBugetEntity bugetEntity = QBugetEntity.bugetEntity;
+    public Page<BudgetDto> findByConsumer(Pageable page, int consumerId) {
+        final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
         final QConsumerUserEntity consumerUserEntity = QConsumerUserEntity.consumerUserEntity;
 
-        JPAQuery<BugetDto> query = new JPAQuery<>(em);
-        query.select(Projections.constructor(BugetDto.class,
-                        bugetEntity))
-                .from(bugetEntity)
-                .join(bugetEntity.consumer, consumerUserEntity)
-                .orderBy(bugetEntity.openingDate.desc());
+        JPAQuery<BudgetDto> query = new JPAQuery<>(em);
+        query.select(Projections.constructor(BudgetDto.class,
+                        budgetEntity))
+                .from(budgetEntity)
+                .join(budgetEntity.consumer, consumerUserEntity)
+                .orderBy(budgetEntity.openingDate.desc());
 
         query.limit(page.getPageSize());
         query.offset(page.getOffset());

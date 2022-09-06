@@ -1,7 +1,8 @@
 package br.com.contratei.entity;
 
-import br.com.contratei.dto.BugetDto;
-import br.com.contratei.enuns.BugetStatusEnum;
+import br.com.contratei.dto.BudgetDto;
+import br.com.contratei.dto.ProviderUserDto;
+import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.enuns.PriorityLevelEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
@@ -11,13 +12,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "buget")
-public class BugetEntity {
+@Table(name = "budget")
+public class BudgetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,7 @@ public class BugetEntity {
     private String title;
 
     @Enumerated(EnumType.ORDINAL)
-    private BugetStatusEnum status;
+    private BudgetStatusEnum status;
     private BigDecimal value;
 
     @Enumerated(EnumType.ORDINAL)
@@ -43,7 +45,11 @@ public class BugetEntity {
     @JoinColumn(name = "consumer_id")
     private ConsumerUserEntity consumer;
 
-    public BugetEntity(BugetDto dto) {
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "provider_id")
+    private ProviderUserEntity provider;
+
+    public BudgetEntity(BudgetDto dto) {
         this.id = dto.getId();
         this.title = dto.getTitle();
         this.status = dto.getStatus();
@@ -53,6 +59,7 @@ public class BugetEntity {
         this.priority = dto.getPriority();
         this.openingDate = dto.getOpeningDate();
         this.completionDate = dto.getCompletionDate();
-        this.consumer = new ConsumerUserEntity(dto.getConsumer());
+        this.consumer = Objects.nonNull(dto.getConsumer()) ? new ConsumerUserEntity(dto.getConsumer()) : null;
+        this.provider = Objects.nonNull(dto.getProvider()) ?  new ProviderUserEntity(dto.getProvider()) : null;
     }
 }

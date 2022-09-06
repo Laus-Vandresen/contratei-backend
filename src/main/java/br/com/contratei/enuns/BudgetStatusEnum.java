@@ -1,6 +1,6 @@
 package br.com.contratei.enuns;
 
-public enum BugetStatusEnum {
+public enum BudgetStatusEnum {
 
     ABERTO,
     FINALIZADO,

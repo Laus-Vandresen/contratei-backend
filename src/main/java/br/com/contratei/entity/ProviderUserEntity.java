@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,6 +32,10 @@ public class ProviderUserEntity {
     private BigDecimal hourValue;
     @Enumerated(EnumType.ORDINAL)
     private ServiceTypeEnum serviceType;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="provider_id")
+    private List<BudgetEntity> budgets;
 
     public ProviderUserEntity(ProviderUserDto usuario) {
         this.email = usuario.getEmail();

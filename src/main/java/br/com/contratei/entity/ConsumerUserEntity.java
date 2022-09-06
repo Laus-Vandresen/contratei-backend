@@ -28,7 +28,7 @@ public class ConsumerUserEntity {
 
     @OneToMany(cascade = CascadeType.DETACH)
     @JoinColumn(name="consumer_id")
-    private List<BugetEntity> bugets;
+    private List<BudgetEntity> budgets;
 
     public ConsumerUserEntity(ConsumerUserDto dto) {
         this.id = dto.getId();
