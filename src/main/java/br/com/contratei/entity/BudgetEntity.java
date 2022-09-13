@@ -1,7 +1,6 @@
 package br.com.contratei.entity;
 
 import br.com.contratei.dto.BudgetDto;
-import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.enuns.PriorityLevelEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
