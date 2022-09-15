@@ -3,6 +3,7 @@ package br.com.contratei.repository.impl;
 import br.com.contratei.dto.BudgetDto;
 import br.com.contratei.entity.QBudgetEntity;
 import br.com.contratei.entity.QConsumerUserEntity;
+import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.repository.CustomBudgetRepository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -19,7 +20,7 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
     private EntityManager em;
 
     @Override
-    public Page<BudgetDto> findByConsumer(Pageable page, int consumerId) {
+    public Page<BudgetDto> findByConsumer(Pageable page, int consumerId, BudgetStatusEnum status) {
         final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
         final QConsumerUserEntity consumerUserEntity = QConsumerUserEntity.consumerUserEntity;
 
@@ -28,6 +29,7 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
                         budgetEntity))
                 .from(budgetEntity)
                 .join(budgetEntity.consumer, consumerUserEntity)
+                .where(budgetEntity.status.eq(status))
                 .orderBy(budgetEntity.openingDate.desc());
 
         query.limit(page.getPageSize());

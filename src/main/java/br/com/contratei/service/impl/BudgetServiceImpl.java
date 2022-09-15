@@ -2,6 +2,7 @@ package br.com.contratei.service.impl;
 
 import br.com.contratei.dto.BudgetDto;
 import br.com.contratei.entity.BudgetEntity;
+import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.repository.BudgetRepository;
 import br.com.contratei.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Page<BudgetDto> findByConsumer(int page, int size, int consumerId) {
-        return repository.findByConsumer(PageRequest.of(page, size), consumerId);
+    public Page<BudgetDto> findByConsumer(int page, int size, int consumerId, BudgetStatusEnum status) {
+        return repository.findByConsumer(PageRequest.of(page, size), consumerId, status);
     }
 }
