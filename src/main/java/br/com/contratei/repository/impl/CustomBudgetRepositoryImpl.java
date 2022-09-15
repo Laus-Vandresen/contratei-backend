@@ -5,6 +5,7 @@ import br.com.contratei.entity.QBudgetEntity;
 import br.com.contratei.entity.QConsumerUserEntity;
 import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.repository.CustomBudgetRepository;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Objects;
 
 public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
 
@@ -24,12 +26,18 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
         final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
         final QConsumerUserEntity consumerUserEntity = QConsumerUserEntity.consumerUserEntity;
 
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        if (Objects.nonNull(status)) {
+            predicate.and(budgetEntity.status.eq(status));
+        }
+
         JPAQuery<BudgetDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(BudgetDto.class,
                         budgetEntity))
                 .from(budgetEntity)
                 .join(budgetEntity.consumer, consumerUserEntity)
-                .where(budgetEntity.status.eq(status))
+                .where(predicate)
                 .orderBy(budgetEntity.openingDate.desc());
 
         query.limit(page.getPageSize());
