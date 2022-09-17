@@ -24,7 +24,7 @@ public class BudgetController {
     public Page<BudgetDto> findByConsumer(@RequestParam int page,
                                           @RequestParam int size,
                                           @RequestParam int consumerId,
-                                          @RequestParam BudgetStatusEnum status) {
+                                          @RequestParam(name = "status", required = false) BudgetStatusEnum status) {
         return service.findByConsumer(page, size, consumerId, status);
     }
 
