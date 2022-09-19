@@ -38,7 +38,7 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
                 .from(budgetEntity)
                 .join(budgetEntity.consumer, consumerUserEntity)
                 .where(predicate)
-                .orderBy(budgetEntity.openingDate.desc());
+                .orderBy(budgetEntity.id.desc());
 
         query.limit(page.getPageSize());
         query.offset(page.getOffset());
