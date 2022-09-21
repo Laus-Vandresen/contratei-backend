@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProviderUserRepository extends JpaRepository<ProviderUserEntity, Integer> {
+public interface ProviderUserRepository extends JpaRepository<ProviderUserEntity, Integer>, CustomProviderUserRepository {
 
     List<ProviderUserEntity> findByEmail(String email);
 

@@ -1,11 +1,12 @@
 package br.com.contratei.service.impl;
 
 import br.com.contratei.dto.ProviderUserDto;
-import br.com.contratei.entity.ProviderUserEntity;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.ProviderUserRepository;
 import br.com.contratei.service.SearchProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,5 +26,10 @@ public class SearchProviderServiceImpl implements SearchProviderService {
     @Override
     public List<ProviderUserDto> findByServiceType(ServiceTypeEnum serviceType) {
         return repository.findByServiceTypeOrderByKmWorkRangeAsc(serviceType).stream().map(ProviderUserDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<ProviderUserDto> findPageable(int page, int size) {
+        return repository.findPageable(PageRequest.of(page, size));
     }
 }
