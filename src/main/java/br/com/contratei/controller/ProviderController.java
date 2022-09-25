@@ -1,10 +1,8 @@
 package br.com.contratei.controller;
 
-import br.com.contratei.dto.BudgetDto;
 import br.com.contratei.dto.ProviderUserDto;
-import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
-import br.com.contratei.service.SearchProviderService;
+import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/search-provider")
-public class SearchProviderController {
+@RequestMapping("/api/provider")
+public class ProviderController {
 
     @Autowired
-    private SearchProviderService service;
+    private ProviderService service;
 
     @GetMapping("/name")
     public List<ProviderUserDto> findByName(@RequestParam String prefix) {
@@ -31,8 +29,13 @@ public class SearchProviderController {
         return service.findByServiceType(serviceType);
     }
 
+    @GetMapping("/find-by-id")
+    public ProviderUserDto findById(@RequestParam int id) {
+        return service.findById(id);
+    }
+
     @GetMapping()
-    public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size) {
-        return service.findPageable(page, size);
+    public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType) {
+        return service.findPageable(page, size, serviceType);
     }
 }

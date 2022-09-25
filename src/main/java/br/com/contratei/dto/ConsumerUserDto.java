@@ -19,6 +19,7 @@ public class ConsumerUserDto {
     private String lastName;
     private String cpf;
     private String contactNumber;
+    private byte[] profilePicture;
 
     public ConsumerUserDto(ConsumerUserEntity entity) {
         this.id = entity.getId();
@@ -28,5 +29,6 @@ public class ConsumerUserDto {
         this.lastName = entity.getLastName();
         this.cpf = entity.getCpf();
         this.contactNumber = entity.getContactNumber();
+        this.profilePicture = entity.getProfilePicture();
     }
 }

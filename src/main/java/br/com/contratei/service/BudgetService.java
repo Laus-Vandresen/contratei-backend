@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 
 public interface BudgetService {
 
-    BudgetEntity findById(Integer id);
+    BudgetDto findById(Integer id);
     BudgetEntity save(BudgetDto dto);
     Page<BudgetDto> findByConsumer(int page, int size, int consumerId, BudgetStatusEnum status);
 }

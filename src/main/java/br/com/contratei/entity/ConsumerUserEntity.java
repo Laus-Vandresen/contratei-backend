@@ -25,10 +25,19 @@ public class ConsumerUserEntity {
     private String lastName;
     private String cpf;
     private String contactNumber;
+    private byte[] profilePicture;
 
     @OneToMany(cascade = CascadeType.DETACH)
     @JoinColumn(name="consumer_id")
     private List<BudgetEntity> budgets;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="consumer_id")
+    private List<CommentEntity> comments;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="consumer_id")
+    private List<AddressEntity> address;
 
     public ConsumerUserEntity(ConsumerUserDto dto) {
         this.id = dto.getId();
@@ -38,5 +47,6 @@ public class ConsumerUserEntity {
         this.lastName = dto.getLastName();
         this.cpf = dto.getCpf();
         this.contactNumber = dto.getContactNumber();
+        this.profilePicture = dto.getProfilePicture();
     }
 }

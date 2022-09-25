@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,10 +33,25 @@ public class ProviderUserEntity {
     private BigDecimal hourValue;
     @Enumerated(EnumType.ORDINAL)
     private ServiceTypeEnum serviceType;
+    private byte[] profilePicture;
+    private byte[] backgroundImage;
+    private Double score;
 
     @OneToMany(cascade = CascadeType.DETACH)
     @JoinColumn(name="provider_id")
     private List<BudgetEntity> budgets;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="provider_id")
+    private List<PhotoEntity> pictures;
+
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="provider_id")
+    private List<CommentEntity> comments;
+
+    public void updateScore(Double score) {
+        this.score = score;
+    }
 
     public ProviderUserEntity(ProviderUserDto usuario) {
         this.email = usuario.getEmail();
@@ -47,5 +63,9 @@ public class ProviderUserEntity {
         this.description = usuario.getDescription();
         this.kmWorkRange = usuario.getKmWorkRange();
         this.hourValue = usuario.getHourValue();
+        this.profilePicture = usuario.getProfilePicture();
+        this.backgroundImage = usuario.getBackgroundImage();
+        this.pictures = usuario.getPictures().stream().map(PhotoEntity::new).collect(Collectors.toList());
+        this.comments = usuario.getComments().stream().map(CommentEntity::new).collect(Collectors.toList());
     }
 }

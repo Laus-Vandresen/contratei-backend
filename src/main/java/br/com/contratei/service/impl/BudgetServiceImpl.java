@@ -17,8 +17,8 @@ public class BudgetServiceImpl implements BudgetService {
     BudgetRepository repository;
 
     @Override
-    public BudgetEntity findById(Integer id) {
-        return repository.findById(id).orElse(null);
+    public BudgetDto findById(Integer id) {
+        return new BudgetDto(repository.findById(id).orElse(null));
     }
 
     @Override
