@@ -1,6 +1,7 @@
 package br.com.contratei.service;
 
 import br.com.contratei.dto.ProviderUserDto;
+import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import org.springframework.data.domain.Page;
 

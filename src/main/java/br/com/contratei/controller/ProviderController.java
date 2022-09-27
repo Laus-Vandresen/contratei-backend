@@ -18,7 +18,6 @@ import java.util.List;
 public class ProviderController {
 
     @Autowired
-    @Lazy
     private ProviderService service;
 
     @GetMapping("/name")

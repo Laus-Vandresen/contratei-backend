@@ -54,6 +54,7 @@ public class ProviderUserEntity {
     }
 
     public ProviderUserEntity(ProviderUserDto usuario) {
+        this.id = usuario.getId();
         this.email = usuario.getEmail();
         this.password = usuario.getPassword();
         this.firstName = usuario.getFirstName();

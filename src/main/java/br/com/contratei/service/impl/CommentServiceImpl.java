@@ -20,15 +20,9 @@ public class CommentServiceImpl implements CommentService {
     @Lazy
     private CommentRepository repository;
 
-    @Autowired
-    @Lazy
-    private ProviderService providerService;
-
     @Override
-    @Transactional
     public void createComment(CommentDto comment) {
         repository.save(new CommentEntity(comment));
-        providerService.recalculateScore(comment.getProvider().getId());
     }
 
     @Override

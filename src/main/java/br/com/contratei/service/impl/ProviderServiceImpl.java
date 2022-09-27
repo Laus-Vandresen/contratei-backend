@@ -58,6 +58,5 @@ public class ProviderServiceImpl implements ProviderService {
         });
         ProviderUserEntity provider = repository.findById(providerId).orElse(null);
         provider.updateScore(score.get() / qtdComments);
-        repository.save(provider);
     }
 }
