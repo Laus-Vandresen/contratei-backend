@@ -1,15 +1,13 @@
 package br.com.contratei.controller;
 
+import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +36,10 @@ public class ProviderController {
     @GetMapping()
     public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType) {
         return service.findPageable(page, size, serviceType);
+    }
+
+    @PutMapping
+    public ProviderUserDto changeProviderUser(@PathVariable  int providerId, @RequestBody CoreProviderDto coreProvider) {
+        return service.changeProviderUser(providerId, coreProvider);
     }
 }

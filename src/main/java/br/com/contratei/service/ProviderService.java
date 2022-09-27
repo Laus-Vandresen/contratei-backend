@@ -1,7 +1,7 @@
 package br.com.contratei.service;
 
+import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.ProviderUserDto;
-import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import org.springframework.data.domain.Page;
 
@@ -18,4 +18,6 @@ public interface ProviderService {
     Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType);
 
     void recalculateScore(int providerId);
+
+    ProviderUserDto changeProviderUser(int providerId, CoreProviderDto coreProvider);
 }

@@ -1,5 +1,6 @@
 package br.com.contratei.entity;
 
+import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
@@ -51,6 +52,18 @@ public class ProviderUserEntity {
 
     public void updateScore(Double score) {
         this.score = score;
+    }
+
+    public void changeCoreData(CoreProviderDto dto) {
+        this.email = dto.getEmail();
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+        this.cpf = dto.getCpf();
+        this.contactNumber = dto.getContactNumber();
+        this.description = dto.getDescription();
+        this.hourValue = dto.getHourValue();
+        this.profilePicture = dto.getProfilePicture();
+        this.backgroundImage = dto.getBackgroundImage();
     }
 
     public ProviderUserEntity(ProviderUserDto usuario) {

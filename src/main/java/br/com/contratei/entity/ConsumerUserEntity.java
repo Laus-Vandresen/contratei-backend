@@ -1,6 +1,7 @@
 package br.com.contratei.entity;
 
 import br.com.contratei.dto.ConsumerUserDto;
+import br.com.contratei.dto.CoreConsumerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,15 @@ public class ConsumerUserEntity {
     @OneToMany(cascade = CascadeType.DETACH)
     @JoinColumn(name="consumer_id")
     private List<AddressEntity> address;
+
+    public void changeCoreData(CoreConsumerDto dto) {
+        this.email = dto.getEmail();
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+        this.cpf = dto.getCpf();
+        this.contactNumber = dto.getContactNumber();
+        this.profilePicture = dto.getProfilePicture();
+    }
 
     public ConsumerUserEntity(ConsumerUserDto dto) {
         this.id = dto.getId();

@@ -1,5 +1,6 @@
 package br.com.contratei.service.impl;
 
+import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.entity.ProviderUserEntity;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,15 @@ public class ProviderServiceImpl implements ProviderService {
         });
         ProviderUserEntity provider = repository.findById(providerId).orElse(null);
         provider.updateScore(score.get() / qtdComments);
+    }
+
+    @Override
+    public ProviderUserDto changeProviderUser(int providerId, CoreProviderDto coreProvider) {
+        Optional<ProviderUserEntity> entity = repository.findById(providerId);
+        if (entity.isPresent()) {
+            entity.get().changeCoreData(coreProvider);
+            return new ProviderUserDto(entity.get());
+        }
+        return null;
     }
 }
