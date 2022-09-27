@@ -6,6 +6,7 @@ import br.com.contratei.repository.CommentRepository;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,9 +17,11 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
+    @Lazy
     private CommentRepository repository;
 
     @Autowired
+    @Lazy
     private ProviderService providerService;
 
     @Override

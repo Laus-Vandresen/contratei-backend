@@ -8,6 +8,7 @@ import br.com.contratei.repository.ProviderUserRepository;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,11 @@ import java.util.stream.Collectors;
 public class ProviderServiceImpl implements ProviderService {
 
     @Autowired
+    @Lazy
     private ProviderUserRepository repository;
 
     @Autowired
+    @Lazy
     private CommentService commentService;
 
     @Override

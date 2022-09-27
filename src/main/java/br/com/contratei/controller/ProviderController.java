@@ -4,6 +4,7 @@ import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProviderController {
 
     @Autowired
+    @Lazy
     private ProviderService service;
 
     @GetMapping("/name")

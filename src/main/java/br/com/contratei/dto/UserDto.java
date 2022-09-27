@@ -24,6 +24,8 @@ public class UserDto {
     private Double kmWorkRange;
     private BigDecimal hourValue;
     private Boolean isProvider;
+    private byte[] profilePicture;
+    private byte[] backgroundImage;
 
     public UserDto(ConsumerUserEntity entity) {
         this.id = entity.getId();
@@ -34,6 +36,7 @@ public class UserDto {
         this.cpf = entity.getCpf();
         this.contactNumber = entity.getContactNumber();
         this.isProvider = false;
+        this.profilePicture = entity.getProfilePicture();
     }
 
     public UserDto(ProviderUserEntity entity) {
@@ -48,5 +51,7 @@ public class UserDto {
         this.kmWorkRange = entity.getKmWorkRange();
         this.hourValue = entity.getHourValue();
         this.isProvider = true;
+        this.profilePicture = entity.getProfilePicture();
+        this.backgroundImage = entity.getBackgroundImage();
     }
 }

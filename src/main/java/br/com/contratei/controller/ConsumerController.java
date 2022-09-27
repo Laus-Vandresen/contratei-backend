@@ -3,6 +3,7 @@ package br.com.contratei.controller;
 import br.com.contratei.dto.CommentDto;
 import br.com.contratei.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConsumerController {
 
     @Autowired
+    @Lazy
     private ConsumerService service;
 
     @PostMapping("create-comment")
