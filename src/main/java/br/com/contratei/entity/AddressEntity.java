@@ -25,10 +25,16 @@ public class AddressEntity {
     private String street;
     private String numberStreet;
     private String postCode;
+    private String complement;
+    private Boolean main;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "consumer_id")
     private ConsumerUserEntity consumer;
+
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "provider_id")
+    private ProviderUserEntity provider;
 
     public AddressEntity(AddressDto dto) {
         this.id = dto.getId();
@@ -38,6 +44,9 @@ public class AddressEntity {
         this.street = dto.getStreet();
         this.numberStreet = dto.getNumberStreet();
         this.postCode = dto.getPostCode();
+        this.complement = dto.getComplement();
+        this.main = dto.getMain();
         this.consumer = Objects.nonNull(dto.getConsumer()) ? new ConsumerUserEntity(dto.getConsumer()) : null;
+        this.provider = Objects.nonNull(dto.getProvider()) ? new ProviderUserEntity(dto.getProvider()) : null;
     }
 }

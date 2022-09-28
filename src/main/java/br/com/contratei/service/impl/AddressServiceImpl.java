@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -21,7 +22,12 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<AddressDto> findAllAddressByConsumerId(int consumerId) {
-        return repository.findAllByConsumerId(consumerId);
+    public List<AddressDto> findAllByConsumerId(int consumerId) {
+        return repository.findAllByConsumerId(consumerId).stream().map(AddressDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AddressDto> findAllByProviderId(int providerId) {
+        return repository.findAllByProviderId(providerId).stream().map(AddressDto::new).collect(Collectors.toList());
     }
 }

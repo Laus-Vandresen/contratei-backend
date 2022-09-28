@@ -8,5 +8,7 @@ public interface AddressService {
 
     void createAddress(AddressDto addressDto);
 
-    List<AddressDto> findAllAddressByConsumerId(int consumerId);
+    List<AddressDto> findAllByConsumerId(int consumerId);
+
+    List<AddressDto> findAllByProviderId(int providerId);
 }

@@ -1,12 +1,11 @@
 package br.com.contratei.controller;
 
-import br.com.contratei.dto.*;
-import br.com.contratei.service.AddressService;
+import br.com.contratei.dto.CommentDto;
+import br.com.contratei.dto.ConsumerUserDto;
+import br.com.contratei.dto.CoreConsumerDto;
 import br.com.contratei.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/consumer")
@@ -14,9 +13,6 @@ public class ConsumerController {
 
     @Autowired
     private ConsumerService service;
-
-    @Autowired
-    private AddressService addressService;
 
     @PostMapping("create-comment")
     public void createComment(@RequestBody CommentDto comment) {
@@ -31,16 +27,6 @@ public class ConsumerController {
     @GetMapping("find-by-id")
     public ConsumerUserDto findById(@RequestParam int consumerId) {
         return service.findById(consumerId);
-    }
-
-    @PostMapping("create-address")
-    public void createAddress(@RequestBody AddressDto addressDto) {
-        addressService.createAddress(addressDto);
-    }
-
-    @GetMapping("/find-address-by-consumer-id")
-    public List<AddressDto> findAllAddressByConsumerId(@RequestParam int consumerId) {
-        return addressService.findAllAddressByConsumerId(consumerId);
     }
 
 }
