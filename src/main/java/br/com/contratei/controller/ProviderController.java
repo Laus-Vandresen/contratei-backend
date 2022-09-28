@@ -37,7 +37,7 @@ public class ProviderController {
         return service.findPageable(page, size, serviceType);
     }
 
-    @PutMapping
+    @PutMapping("/{providerId}")
     public ProviderUserDto changeProviderUser(@PathVariable  int providerId, @RequestBody CoreProviderDto coreProvider) {
         return service.changeProviderUser(providerId, coreProvider);
     }

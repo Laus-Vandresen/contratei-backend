@@ -17,7 +17,7 @@ public class ConsumerController {
         service.createComment(comment);
     }
 
-    @PutMapping
+    @PutMapping("/{consumerId}")
     public ConsumerUserDto changeConsumerUser(@PathVariable  int consumerId, @RequestBody CoreConsumerDto coreConsumer) {
         return service.changeConsumerUser(consumerId, coreConsumer);
     }
