@@ -41,7 +41,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     }
 
     @Override
-    public ConsumerUserDto changeProviderUser(int consumerId, CoreConsumerDto coreConsumer) {
+    public ConsumerUserDto changeConsumerUser(int consumerId, CoreConsumerDto coreConsumer) {
         Optional<ConsumerUserEntity> entity = repository.findById(consumerId);
         if (entity.isPresent()) {
             entity.get().changeCoreData(coreConsumer);

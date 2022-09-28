@@ -19,7 +19,7 @@ public class ConsumerController {
     }
 
     @PutMapping
-    public ConsumerUserDto changeProviderUser(@PathVariable  int consumerId, @RequestBody CoreConsumerDto coreConsumer) {
-        return service.changeProviderUser(consumerId, coreConsumer);
+    public ConsumerUserDto changeConsumerUser(@PathVariable  int consumerId, @RequestBody CoreConsumerDto coreConsumer) {
+        return service.changeConsumerUser(consumerId, coreConsumer);
     }
 }
