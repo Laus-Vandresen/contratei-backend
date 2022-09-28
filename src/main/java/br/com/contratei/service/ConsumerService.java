@@ -9,4 +9,6 @@ public interface ConsumerService {
     void createComment(CommentDto comment);
 
     ConsumerUserDto changeConsumerUser(int consumerId, CoreConsumerDto coreConsumer);
+
+    ConsumerUserDto findById(int consumerId);
 }

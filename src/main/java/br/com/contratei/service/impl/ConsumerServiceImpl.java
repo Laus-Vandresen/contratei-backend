@@ -49,4 +49,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         }
         return null;
     }
+
+    @Override
+    public ConsumerUserDto findById(int consumerId) {
+        return new ConsumerUserDto(repository.findById(consumerId).get());
+    }
 }

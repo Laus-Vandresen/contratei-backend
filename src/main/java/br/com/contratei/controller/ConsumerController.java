@@ -21,4 +21,9 @@ public class ConsumerController {
     public ConsumerUserDto changeConsumerUser(@PathVariable  int consumerId, @RequestBody CoreConsumerDto coreConsumer) {
         return service.changeConsumerUser(consumerId, coreConsumer);
     }
+
+    @GetMapping("find-by-id")
+    public ConsumerUserDto findById(@RequestParam int consumerId) {
+        return service.findById(consumerId);
+    }
 }
