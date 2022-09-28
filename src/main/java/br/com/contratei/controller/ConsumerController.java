@@ -38,6 +38,7 @@ public class ConsumerController {
         addressService.createAddress(addressDto);
     }
 
+    @GetMapping("/find-address-by-consumer-id")
     public List<AddressDto> findAllAddressByConsumerId(@RequestParam int consumerId) {
         return addressService.findAllAddressByConsumerId(consumerId);
     }
