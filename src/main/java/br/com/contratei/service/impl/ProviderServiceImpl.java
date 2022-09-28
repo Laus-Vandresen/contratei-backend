@@ -1,12 +1,14 @@
 package br.com.contratei.service.impl;
 
 import br.com.contratei.dto.CoreProviderDto;
+import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.entity.ProviderUserEntity;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.ProviderUserRepository;
 import br.com.contratei.service.CommentService;
+import br.com.contratei.service.PhotoService;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -29,6 +31,9 @@ public class ProviderServiceImpl implements ProviderService {
     @Autowired
     @Lazy
     private CommentService commentService;
+
+    @Autowired
+    private PhotoService photoService;
 
     @Override
     public List<ProviderUserDto> findByName(String prefix) {
@@ -70,5 +75,10 @@ public class ProviderServiceImpl implements ProviderService {
             return new ProviderUserDto(repository.save(entity.get()));
         }
         return null;
+    }
+
+    @Override
+    public List<PhotoDto> findPhotosProvider(int providerId) {
+        return photoService.findPhotosProvider(providerId);
     }
 }

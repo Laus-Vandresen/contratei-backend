@@ -1,6 +1,7 @@
 package br.com.contratei.service;
 
 import br.com.contratei.dto.CoreProviderDto;
+import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import org.springframework.data.domain.Page;
@@ -20,4 +21,6 @@ public interface ProviderService {
     void recalculateScore(int providerId);
 
     ProviderUserDto changeProviderUser(int providerId, CoreProviderDto coreProvider);
+
+    List<PhotoDto> findPhotosProvider(int providerId);
 }

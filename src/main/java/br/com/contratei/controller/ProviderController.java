@@ -1,6 +1,7 @@
 package br.com.contratei.controller;
 
 import br.com.contratei.dto.CoreProviderDto;
+import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.service.ProviderService;
@@ -41,4 +42,11 @@ public class ProviderController {
     public ProviderUserDto changeProviderUser(@PathVariable  int providerId, @RequestBody CoreProviderDto coreProvider) {
         return service.changeProviderUser(providerId, coreProvider);
     }
+
+    @GetMapping("/find-photos-provider")
+    public List<PhotoDto> findPhotosProvider(@RequestParam int providerId) {
+        return service.findPhotosProvider(providerId);
+    }
+
+
 }
