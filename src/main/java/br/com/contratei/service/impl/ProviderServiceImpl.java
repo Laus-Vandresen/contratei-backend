@@ -67,7 +67,7 @@ public class ProviderServiceImpl implements ProviderService {
         Optional<ProviderUserEntity> entity = repository.findById(providerId);
         if (entity.isPresent()) {
             entity.get().changeCoreData(coreProvider);
-            return new ProviderUserDto(entity.get());
+            return new ProviderUserDto(repository.save(entity.get()));
         }
         return null;
     }

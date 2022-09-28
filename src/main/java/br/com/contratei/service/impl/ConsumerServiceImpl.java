@@ -45,7 +45,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         Optional<ConsumerUserEntity> entity = repository.findById(consumerId);
         if (entity.isPresent()) {
             entity.get().changeCoreData(coreConsumer);
-            return new ConsumerUserDto(entity.get());
+            return new ConsumerUserDto(repository.save(entity.get()));
         }
         return null;
     }
