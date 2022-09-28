@@ -26,6 +26,6 @@ public class AddressController {
 
     @GetMapping("/find-by-provider-id")
     public List<AddressDto> findAllByProviderId(@RequestParam int providerId) {
-        return service.findAllAddressByConsumerId(consumerId);
+        return service.findAllByProviderId(providerId);
     }
 }
