@@ -1,9 +1,11 @@
 package br.com.contratei.controller;
 
+import br.com.contratei.dto.CommentDto;
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.ServiceTypeEnum;
+import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,9 @@ public class ProviderController {
 
     @Autowired
     private ProviderService service;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/name")
     public List<ProviderUserDto> findByName(@RequestParam String prefix) {
@@ -46,6 +51,11 @@ public class ProviderController {
     @GetMapping("/find-photos-provider")
     public List<PhotoDto> findPhotosProvider(@RequestParam int providerId) {
         return service.findPhotosProvider(providerId);
+    }
+
+    @GetMapping("/find-comment-by-provider")
+    public Page<CommentDto> findByProviderId(@RequestParam int page, @RequestParam int size, @RequestParam int providerId) {
+        return commentService.findByProviderId(page, size, providerId);
     }
 
 
