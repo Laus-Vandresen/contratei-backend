@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,8 +27,6 @@ public class ProviderUserDto {
     private BigDecimal hourValue;
     private byte[] profilePicture;
     private byte[] backgroundImage;
-    List<PhotoDto> pictures;
-    private List<CommentDto> comments;
 
     public ProviderUserDto(ProviderUserEntity entity) {
         this.id = entity.getId();
@@ -45,7 +41,5 @@ public class ProviderUserDto {
         this.hourValue = entity.getHourValue();
         this.profilePicture = entity.getProfilePicture();
         this.backgroundImage = entity.getBackgroundImage();
-        this.pictures = entity.getPictures().stream().map(PhotoDto::new).collect(Collectors.toList());
-        this.comments = entity.getComments().stream().map(CommentDto::new).collect(Collectors.toList());
     }
 }

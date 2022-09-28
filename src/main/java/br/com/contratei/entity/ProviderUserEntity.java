@@ -79,7 +79,5 @@ public class ProviderUserEntity {
         this.hourValue = usuario.getHourValue();
         this.profilePicture = usuario.getProfilePicture();
         this.backgroundImage = usuario.getBackgroundImage();
-        this.pictures = usuario.getPictures().stream().map(PhotoEntity::new).collect(Collectors.toList());
-        this.comments = usuario.getComments().stream().map(CommentEntity::new).collect(Collectors.toList());
     }
 }

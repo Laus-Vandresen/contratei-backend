@@ -3,7 +3,6 @@ package br.com.contratei.controller;
 import br.com.contratei.dto.*;
 import br.com.contratei.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
