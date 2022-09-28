@@ -48,15 +48,14 @@ public class ProviderController {
         return service.changeProviderUser(providerId, coreProvider);
     }
 
-    @GetMapping("/find-photos-provider")
-    public List<PhotoDto> findPhotosProvider(@RequestParam int providerId) {
-        return service.findPhotosProvider(providerId);
-    }
-
     @GetMapping("/find-comment-by-provider")
     public Page<CommentDto> findByProviderId(@RequestParam int page, @RequestParam int size, @RequestParam int providerId) {
         return commentService.findByProviderId(page, size, providerId);
     }
 
+    @GetMapping("/find-photos-provider")
+    public List<PhotoDto> findPhotosProvider(@RequestParam int providerId) {
+        return service.findPhotosProvider(providerId);
+    }
 
 }
