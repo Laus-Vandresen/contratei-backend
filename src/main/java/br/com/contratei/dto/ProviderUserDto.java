@@ -27,6 +27,7 @@ public class ProviderUserDto {
     private BigDecimal hourValue;
     private byte[] profilePicture;
     private byte[] backgroundImage;
+    private Double score;
 
     public ProviderUserDto(ProviderUserEntity entity) {
         this.id = entity.getId();
@@ -41,5 +42,6 @@ public class ProviderUserDto {
         this.hourValue = entity.getHourValue();
         this.profilePicture = entity.getProfilePicture();
         this.backgroundImage = entity.getBackgroundImage();
+        this.score = entity.getScore();
     }
 }
