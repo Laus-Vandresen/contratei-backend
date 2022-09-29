@@ -2,6 +2,7 @@ package br.com.contratei.controller;
 
 import br.com.contratei.dto.*;
 import br.com.contratei.enuns.ServiceTypeEnum;
+import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
 import br.com.contratei.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class LoginController {
 
     @Autowired
     private ProviderService providerService;
+
+    @Autowired
+    private CommentService commentService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDto authenticatioRequest) throws Exception {
@@ -50,5 +54,15 @@ public class LoginController {
     @GetMapping("/find-provider")
     public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType) {
         return providerService.findPageable(page, size, serviceType);
+    }
+
+    @GetMapping("/find-provider-by-id")
+    public ProviderUserDto findById(@RequestParam int id) {
+        return providerService.findById(id);
+    }
+
+    @GetMapping("/find-comment-by-provider")
+    public Page<CommentDto> findByProviderId(@RequestParam int page, @RequestParam int size, @RequestParam int providerId) {
+        return commentService.findByProviderId(page, size, providerId);
     }
 }
