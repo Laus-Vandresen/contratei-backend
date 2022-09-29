@@ -1,6 +1,7 @@
 package br.com.contratei.entity;
 
 import br.com.contratei.dto.AddressDto;
+import br.com.contratei.dto.CoreConsumerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,17 @@ public class AddressEntity {
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id")
     private ProviderUserEntity provider;
+
+    public void changeCoreData(AddressDto dto) {
+        this.state = dto.getState();
+        this.city = dto.getCity();
+        this.district = dto.getDistrict();
+        this.street = dto.getStreet();
+        this.numberStreet = dto.getNumberStreet();
+        this.postCode = dto.getPostCode();
+        this.complement = dto.getComplement();
+        this.main = dto.getMain();
+    }
 
     public AddressEntity(AddressDto dto) {
         this.id = dto.getId();

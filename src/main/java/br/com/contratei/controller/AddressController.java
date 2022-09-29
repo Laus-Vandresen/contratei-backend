@@ -1,6 +1,8 @@
 package br.com.contratei.controller;
 
 import br.com.contratei.dto.AddressDto;
+import br.com.contratei.dto.CoreProviderDto;
+import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,5 +29,15 @@ public class AddressController {
     @GetMapping("/find-by-provider-id")
     public List<AddressDto> findAllByProviderId(@RequestParam int providerId) {
         return service.findAllByProviderId(providerId);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAddress(@PathVariable int id) {
+        service.deleteById(id);
+    }
+
+    @PutMapping("/change-address/{id}")
+    public void changeAddress(@PathVariable  int id, @RequestBody AddressDto addres) {
+        service.changeAddress(id, addres);
     }
 }

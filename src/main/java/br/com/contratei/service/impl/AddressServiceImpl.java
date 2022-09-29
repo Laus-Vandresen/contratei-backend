@@ -30,4 +30,16 @@ public class AddressServiceImpl implements AddressService {
     public List<AddressDto> findAllByProviderId(int providerId) {
         return repository.findAllByProviderId(providerId).stream().map(AddressDto::new).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(int id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public void changeAddress(int providerId, AddressDto addres) {
+        var addresEntity = repository.findById(providerId);
+        addresEntity.get().changeCoreData(addres);
+        repository.save(addresEntity.get());
+    }
 }
