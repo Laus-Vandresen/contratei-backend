@@ -48,6 +48,16 @@ public class BudgetEntity {
     @JoinColumn(name = "provider_id")
     private ProviderUserEntity provider;
 
+    public void changeCoreData(BudgetDto dto) {
+        this.title = dto.getTitle();
+        this.status = dto.getStatus();
+        this.value = dto.getValue();
+        this.serviceType = dto.getServiceType();
+        this.description = dto.getDescription();
+        this.priority = dto.getPriority();
+        this.completionDate = dto.getCompletionDate();
+    }
+
     public BudgetEntity(BudgetDto dto) {
         this.id = dto.getId();
         this.title = dto.getTitle();

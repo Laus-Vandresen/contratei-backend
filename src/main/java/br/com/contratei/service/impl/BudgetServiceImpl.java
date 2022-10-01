@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
@@ -29,5 +31,19 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public Page<BudgetDto> findByConsumer(int page, int size, int consumerId, BudgetStatusEnum status) {
         return repository.findByConsumer(PageRequest.of(page, size), consumerId, status);
+    }
+
+    @Override
+    public Boolean checkExistenceBudget(int consumerId, int providerId) {
+        return !repository.findAllByConsumerIdAndProviderId(consumerId, providerId).isEmpty();
+    }
+
+    @Override
+    public BudgetDto changeBudget(int budgetId, BudgetDto budget) {
+        Optional<BudgetEntity> budgetEntity = repository.findById(budgetId);
+        if (budgetEntity.isPresent()) {
+            budgetEntity.get().changeCoreData(budget);
+        }
+        return budget;
     }
 }

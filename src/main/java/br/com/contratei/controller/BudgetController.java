@@ -1,6 +1,8 @@
 package br.com.contratei.controller;
 
 import br.com.contratei.dto.BudgetDto;
+import br.com.contratei.dto.CoreProviderDto;
+import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,16 @@ public class BudgetController {
     @PostMapping
     public BudgetDto save(@RequestBody BudgetDto dto) {
         return new BudgetDto(service.save(dto));
+    }
+
+    @GetMapping("/exist-budget")
+    public Boolean checkExistenceBudget(@RequestParam int consumerId, @RequestParam int providerId) {
+        return service.checkExistenceBudget(consumerId, providerId);
+    }
+
+    @PutMapping("/{budgetId}")
+    public BudgetDto changeBudget(@PathVariable  int budgetId, @RequestBody BudgetDto budget) {
+        return service.changeBudget(budgetId, budget);
     }
 
 }
