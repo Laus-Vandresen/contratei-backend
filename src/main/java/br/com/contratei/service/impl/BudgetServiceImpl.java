@@ -43,6 +43,7 @@ public class BudgetServiceImpl implements BudgetService {
         Optional<BudgetEntity> budgetEntity = repository.findById(budgetId);
         if (budgetEntity.isPresent()) {
             budgetEntity.get().changeCoreData(budget);
+            repository.save(budgetEntity.get());
         }
         return budget;
     }
