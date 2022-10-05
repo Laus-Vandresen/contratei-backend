@@ -4,6 +4,8 @@ import br.com.contratei.dto.BudgetDto;
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.enuns.BudgetStatusEnum;
+import br.com.contratei.enuns.PriorityLevelEnum;
+import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,8 +41,10 @@ public class BudgetController {
 
     @GetMapping("/find-open-budgets")
     public Page<BudgetDto> findOpenBudgets(@RequestParam int page,
-                                          @RequestParam int size) {
-        return service.findOpenBudgets(page, size);
+                                           @RequestParam int size,
+                                           @RequestParam(required = false) ServiceTypeEnum serviceType,
+                                           @RequestParam(required = false) PriorityLevelEnum priorityLevel) {
+        return service.findOpenBudgets(page, size, serviceType, priorityLevel);
     }
 
     @PostMapping

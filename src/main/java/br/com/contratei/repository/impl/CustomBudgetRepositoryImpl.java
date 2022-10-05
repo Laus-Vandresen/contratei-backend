@@ -5,6 +5,8 @@ import br.com.contratei.entity.QBudgetEntity;
 import br.com.contratei.entity.QConsumerUserEntity;
 import br.com.contratei.entity.QProviderUserEntity;
 import br.com.contratei.enuns.BudgetStatusEnum;
+import br.com.contratei.enuns.PriorityLevelEnum;
+import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.CustomBudgetRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
@@ -12,6 +14,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -73,14 +76,17 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
     }
 
     @Override
-    public Page<BudgetDto> findOpenBudgets(Pageable page) {
+    public Page<BudgetDto> findOpenBudgets(Pageable page, ServiceTypeEnum serviceType, PriorityLevelEnum priorityLevel) {
         final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
 
         JPAQuery<BudgetDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(BudgetDto.class,
                         budgetEntity))
                 .from(budgetEntity)
-                .where(budgetEntity.status.eq(BudgetStatusEnum.OPEN).and(budgetEntity.provider.isNull()))
+                .where(budgetEntity.status.eq(BudgetStatusEnum.OPEN)
+                        .and(budgetEntity.provider.isNull())
+                        .and(budgetEntity.serviceType.eq(serviceType)
+                        .and(budgetEntity.priority.eq(priorityLevel))))
                 .orderBy(budgetEntity.id.desc());
 
         query.limit(page.getPageSize());
