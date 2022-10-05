@@ -29,6 +29,20 @@ public class BudgetController {
         return service.findByConsumer(page, size, consumerId, status);
     }
 
+    @GetMapping("/find-by-provider")
+    public Page<BudgetDto> findByProvider(@RequestParam int page,
+                                          @RequestParam int size,
+                                          @RequestParam int providerId,
+                                          @RequestParam(name = "status", required = false) BudgetStatusEnum status) {
+        return service.findByProvider(page, size, providerId, status);
+    }
+
+    @GetMapping("/find-open-budgets")
+    public Page<BudgetDto> findOpenBudgets(@RequestParam int page,
+                                          @RequestParam int size) {
+        return service.findOpenBudgets(page, size);
+    }
+
     @PostMapping
     public BudgetDto save(@RequestBody BudgetDto dto) {
         return new BudgetDto(service.save(dto));

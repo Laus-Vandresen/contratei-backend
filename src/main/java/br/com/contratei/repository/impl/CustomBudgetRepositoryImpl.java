@@ -3,6 +3,7 @@ package br.com.contratei.repository.impl;
 import br.com.contratei.dto.BudgetDto;
 import br.com.contratei.entity.QBudgetEntity;
 import br.com.contratei.entity.QConsumerUserEntity;
+import br.com.contratei.entity.QProviderUserEntity;
 import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.repository.CustomBudgetRepository;
 import com.querydsl.core.BooleanBuilder;
@@ -38,6 +39,48 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
                 .from(budgetEntity)
                 .join(budgetEntity.consumer, consumerUserEntity)
                 .where(predicate)
+                .orderBy(budgetEntity.id.desc());
+
+        query.limit(page.getPageSize());
+        query.offset(page.getOffset());
+
+        return new PageImpl<>(query.fetch(), page, query.fetchCount());
+    }
+
+    @Override
+    public Page<BudgetDto> findByProvider(Pageable page, int providerId, BudgetStatusEnum status) {
+        final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
+        final QProviderUserEntity providerUserEntity = QProviderUserEntity.providerUserEntity;
+
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        if (Objects.nonNull(status)) {
+            predicate.and(budgetEntity.status.eq(status));
+        }
+
+        JPAQuery<BudgetDto> query = new JPAQuery<>(em);
+        query.select(Projections.constructor(BudgetDto.class,
+                        budgetEntity))
+                .from(budgetEntity)
+                .join(budgetEntity.provider, providerUserEntity)
+                .where(predicate)
+                .orderBy(budgetEntity.id.desc());
+
+        query.limit(page.getPageSize());
+        query.offset(page.getOffset());
+
+        return new PageImpl<>(query.fetch(), page, query.fetchCount());
+    }
+
+    @Override
+    public Page<BudgetDto> findOpenBudgets(Pageable page) {
+        final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
+
+        JPAQuery<BudgetDto> query = new JPAQuery<>(em);
+        query.select(Projections.constructor(BudgetDto.class,
+                        budgetEntity))
+                .from(budgetEntity)
+                .where(budgetEntity.status.eq(BudgetStatusEnum.OPEN).and(budgetEntity.provider.isNull()))
                 .orderBy(budgetEntity.id.desc());
 
         query.limit(page.getPageSize());

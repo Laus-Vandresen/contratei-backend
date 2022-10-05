@@ -34,6 +34,16 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
+    public Page<BudgetDto> findByProvider(int page, int size, int providerId, BudgetStatusEnum status) {
+        return repository.findByProvider(PageRequest.of(page, size), providerId, status);
+    }
+
+    @Override
+    public Page<BudgetDto> findOpenBudgets(int page, int size) {
+        return repository.findOpenBudgets(PageRequest.of(page, size));
+    }
+
+    @Override
     public Boolean checkExistenceBudget(int consumerId, int providerId) {
         return !repository.findAllByConsumerIdAndProviderId(consumerId, providerId).isEmpty();
     }

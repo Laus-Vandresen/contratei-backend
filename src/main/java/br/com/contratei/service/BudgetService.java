@@ -10,6 +10,8 @@ public interface BudgetService {
     BudgetDto findById(Integer id);
     BudgetEntity save(BudgetDto dto);
     Page<BudgetDto> findByConsumer(int page, int size, int consumerId, BudgetStatusEnum status);
+    Page<BudgetDto> findByProvider(int page, int size, int providerId, BudgetStatusEnum status);
+    Page<BudgetDto> findOpenBudgets(int page, int size);
     Boolean checkExistenceBudget(int consumerId, int providerId);
     BudgetDto changeBudget(int budgetId, BudgetDto budget);
 }
