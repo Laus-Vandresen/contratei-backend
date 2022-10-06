@@ -1,5 +1,6 @@
 package br.com.contratei.dto;
 
+import br.com.contratei.enuns.ActingRegionEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class CoreProviderDto {
     private String contactNumber;
     private String description;
     private BigDecimal hourValue;
+    private ActingRegionEnum actingRegion;
     private byte[] profilePicture;
     private byte[] backgroundImage;
 }

@@ -14,7 +14,7 @@ public interface BudgetService {
     BudgetEntity save(BudgetDto dto);
     Page<BudgetDto> findByConsumer(int page, int size, int consumerId, BudgetStatusEnum status);
     Page<BudgetDto> findByProvider(int page, int size, int providerId, BudgetStatusEnum status);
-    Page<BudgetDto> findOpenBudgets(int page, int size, ServiceTypeEnum serviceType, PriorityLevelEnum priorityLevel);
+    Page<BudgetDto> findOpenBudgets(int page, int size, int providerId, PriorityLevelEnum priorityLevel);
     Boolean checkExistenceBudget(int consumerId, int providerId);
     BudgetDto changeBudget(int budgetId, BudgetDto budget);
 }

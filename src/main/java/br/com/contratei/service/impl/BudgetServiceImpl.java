@@ -7,6 +7,7 @@ import br.com.contratei.enuns.PriorityLevelEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.BudgetRepository;
 import br.com.contratei.service.BudgetService;
+import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,10 @@ import java.util.Optional;
 public class BudgetServiceImpl implements BudgetService {
 
     @Autowired
-    BudgetRepository repository;
+    private BudgetRepository repository;
+
+    @Autowired
+    private ProviderService providerService;
 
     @Override
     public BudgetDto findById(Integer id) {
@@ -42,8 +46,9 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Page<BudgetDto> findOpenBudgets(int page, int size, ServiceTypeEnum serviceType, PriorityLevelEnum priorityLevel) {
-        return repository.findOpenBudgets(PageRequest.of(page, size), serviceType, priorityLevel);
+    public Page<BudgetDto> findOpenBudgets(int page, int size, int providerId, PriorityLevelEnum priorityLevel) {
+        var provider = providerService.findById(providerId);
+        return repository.findOpenBudgets(PageRequest.of(page, size), provider.getServiceType(), priorityLevel);
     }
 
     @Override

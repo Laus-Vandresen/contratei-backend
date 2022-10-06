@@ -2,6 +2,7 @@ package br.com.contratei.entity;
 
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.ProviderUserDto;
+import br.com.contratei.enuns.ActingRegionEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +31,8 @@ public class ProviderUserEntity {
     private String cpf;
     private String contactNumber;
     private String description;
-    private Double kmWorkRange;
+    @Enumerated(EnumType.ORDINAL)
+    private ActingRegionEnum actingRegion;
     private BigDecimal hourValue;
     @Enumerated(EnumType.ORDINAL)
     private ServiceTypeEnum serviceType;
@@ -62,6 +64,7 @@ public class ProviderUserEntity {
         this.contactNumber = dto.getContactNumber();
         this.description = dto.getDescription();
         this.hourValue = dto.getHourValue();
+        this.actingRegion = dto.getActingRegion();
         this.profilePicture = dto.getProfilePicture();
         this.backgroundImage = dto.getBackgroundImage();
     }
@@ -75,8 +78,9 @@ public class ProviderUserEntity {
         this.cpf = usuario.getCpf();
         this.contactNumber = usuario.getContactNumber();
         this.description = usuario.getDescription();
-        this.kmWorkRange = usuario.getKmWorkRange();
+        this.actingRegion = usuario.getActingRegion();
         this.hourValue = usuario.getHourValue();
+        this.serviceType = usuario.getServiceType();
         this.profilePicture = usuario.getProfilePicture();
         this.backgroundImage = usuario.getBackgroundImage();
     }

@@ -1,7 +1,8 @@
 package br.com.contratei.dto;
 
-import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.entity.ProviderUserEntity;
+import br.com.contratei.enuns.ActingRegionEnum;
+import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,9 @@ public class ProviderUserDto {
     private String cpf;
     private String contactNumber;
     private String description;
-    private Double kmWorkRange;
+    private ActingRegionEnum actingRegion;
     private BigDecimal hourValue;
+    private ServiceTypeEnum serviceType;
     private byte[] profilePicture;
     private byte[] backgroundImage;
     private Double score;
@@ -38,8 +40,9 @@ public class ProviderUserDto {
         this.cpf = entity.getCpf();
         this.contactNumber = entity.getContactNumber();
         this.description = entity.getDescription();
-        this.kmWorkRange = entity.getKmWorkRange();
+        this.actingRegion = entity.getActingRegion();
         this.hourValue = entity.getHourValue();
+        this.serviceType = entity.getServiceType();
         this.profilePicture = entity.getProfilePicture();
         this.backgroundImage = entity.getBackgroundImage();
         this.score = entity.getScore();

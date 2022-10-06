@@ -42,9 +42,9 @@ public class BudgetController {
     @GetMapping("/find-open-budgets")
     public Page<BudgetDto> findOpenBudgets(@RequestParam int page,
                                            @RequestParam int size,
-                                           @RequestParam(required = false) ServiceTypeEnum serviceType,
+                                           @RequestParam int providerId,
                                            @RequestParam(required = false) PriorityLevelEnum priorityLevel) {
-        return service.findOpenBudgets(page, size, serviceType, priorityLevel);
+        return service.findOpenBudgets(page, size, providerId, priorityLevel);
     }
 
     @PostMapping
