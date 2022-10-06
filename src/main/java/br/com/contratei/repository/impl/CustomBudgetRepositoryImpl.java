@@ -36,6 +36,8 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
             predicate.and(budgetEntity.status.eq(status));
         }
 
+        predicate.and(consumerUserEntity.id.eq(consumerId));
+
         JPAQuery<BudgetDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(BudgetDto.class,
                         budgetEntity))
@@ -61,6 +63,8 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
             predicate.and(budgetEntity.status.eq(status));
         }
 
+        predicate.and(providerUserEntity.id.eq(providerId));
+
         JPAQuery<BudgetDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(BudgetDto.class,
                         budgetEntity))
@@ -79,14 +83,24 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
     public Page<BudgetDto> findOpenBudgets(Pageable page, ServiceTypeEnum serviceType, PriorityLevelEnum priorityLevel) {
         final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
 
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        predicate.and(budgetEntity.status.eq(BudgetStatusEnum.OPEN));
+        predicate.and(budgetEntity.provider.isNull());
+
+        if (Objects.nonNull(serviceType)) {
+            predicate.and(budgetEntity.serviceType.eq(serviceType));
+        }
+
+        if (Objects.nonNull(priorityLevel)) {
+            predicate.and(budgetEntity.priority.eq(priorityLevel));
+        }
+
         JPAQuery<BudgetDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(BudgetDto.class,
                         budgetEntity))
                 .from(budgetEntity)
-                .where(budgetEntity.status.eq(BudgetStatusEnum.OPEN)
-                        .and(budgetEntity.provider.isNull())
-                        .and(budgetEntity.serviceType.eq(serviceType)
-                        .and(budgetEntity.priority.eq(priorityLevel))))
+                .where(predicate)
                 .orderBy(budgetEntity.id.desc());
 
         query.limit(page.getPageSize());
