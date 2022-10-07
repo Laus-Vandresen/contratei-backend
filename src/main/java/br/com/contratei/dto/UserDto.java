@@ -2,10 +2,13 @@ package br.com.contratei.dto;
 
 import br.com.contratei.entity.ConsumerUserEntity;
 import br.com.contratei.entity.ProviderUserEntity;
+import br.com.contratei.enuns.ActingRegionEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -21,7 +24,7 @@ public class UserDto {
     private String cpf;
     private String contactNumber;
     private String description;
-    private Double kmWorkRange;
+    private ActingRegionEnum actingRegion;
     private BigDecimal hourValue;
     private Boolean isProvider;
     private byte[] profilePicture;
@@ -48,7 +51,7 @@ public class UserDto {
         this.cpf = entity.getCpf();
         this.contactNumber = entity.getContactNumber();
         this.description = entity.getDescription();
-        this.kmWorkRange = entity.getKmWorkRange();
+        this.actingRegion = entity.getActingRegion();
         this.hourValue = entity.getHourValue();
         this.isProvider = true;
         this.profilePicture = entity.getProfilePicture();

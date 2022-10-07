@@ -37,12 +37,12 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public List<ProviderUserDto> findByName(String prefix) {
-        return repository.findByFirstNameStartsWithOrderByKmWorkRangeAsc(prefix).stream().map(ProviderUserDto::new).collect(Collectors.toList());
+        return repository.findByFirstNameStartsWith(prefix).stream().map(ProviderUserDto::new).collect(Collectors.toList());
     }
 
     @Override
     public List<ProviderUserDto> findByServiceType(ServiceTypeEnum serviceType) {
-        return repository.findByServiceTypeOrderByKmWorkRangeAsc(serviceType).stream().map(ProviderUserDto::new).collect(Collectors.toList());
+        return repository.findByServiceType(serviceType).stream().map(ProviderUserDto::new).collect(Collectors.toList());
     }
 
     @Override

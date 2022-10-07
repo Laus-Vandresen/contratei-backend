@@ -12,7 +12,7 @@ public interface ProviderUserRepository extends JpaRepository<ProviderUserEntity
 
     List<ProviderUserEntity> findByEmail(String email);
 
-    List<ProviderUserEntity> findByFirstNameStartsWithOrderByKmWorkRangeAsc(String prefix);
+    List<ProviderUserEntity> findByFirstNameStartsWith(String prefix);
 
-    List<ProviderUserEntity> findByServiceTypeOrderByKmWorkRangeAsc(ServiceTypeEnum serviceType);
+    List<ProviderUserEntity> findByServiceType(ServiceTypeEnum serviceType);
 }
