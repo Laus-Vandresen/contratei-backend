@@ -32,6 +32,12 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public AddressDto findMainByConsumerId(int consumerId) {
+        var consumerAddres = repository.findAllByConsumerIdAndMainIsTrue(consumerId);
+        return new AddressDto(consumerAddres.get(0));
+    }
+
+    @Override
     public void deleteById(int id) {
         repository.deleteById(id);
     }

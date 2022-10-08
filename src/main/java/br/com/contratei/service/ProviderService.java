@@ -1,5 +1,6 @@
 package br.com.contratei.service;
 
+import br.com.contratei.dto.AddressDto;
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
@@ -16,7 +17,7 @@ public interface ProviderService {
 
     ProviderUserDto findById(int id);
 
-    Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType);
+    Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType, int consumerId);
 
     void recalculateScore(int providerId);
 

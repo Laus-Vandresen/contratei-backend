@@ -1,5 +1,6 @@
 package br.com.contratei.service.impl;
 
+import br.com.contratei.dto.AddressDto;
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
@@ -7,6 +8,7 @@ import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.entity.ProviderUserEntity;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.ProviderUserRepository;
+import br.com.contratei.service.AddressService;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.PhotoService;
 import br.com.contratei.service.ProviderService;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -35,6 +38,9 @@ public class ProviderServiceImpl implements ProviderService {
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private AddressService addressService;
+
     @Override
     public List<ProviderUserDto> findByName(String prefix) {
         return repository.findByFirstNameStartsWith(prefix).stream().map(ProviderUserDto::new).collect(Collectors.toList());
@@ -51,8 +57,13 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType) {
-        return repository.findPageable(PageRequest.of(page, size), serviceType);
+    public Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType, int consumerId) {
+        if (Objects.nonNull(consumerId)) {
+            var consumerAddres = addressService.findMainByConsumerId(consumerId);
+            return repository.findPageable(PageRequest.of(page, size), serviceType, consumerAddres);
+        } else {
+            return repository.findPageable(PageRequest.of(page, size), serviceType, null);
+        }
     }
 
     @Override

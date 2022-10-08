@@ -12,4 +12,6 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Integer>
     List<AddressEntity> findAllByConsumerId(int consumerId);
 
     List<AddressEntity> findAllByProviderId(int providerId);
+
+    List<AddressEntity> findAllByConsumerIdAndMainIsTrue(int consumerId);
 }

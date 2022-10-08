@@ -1,9 +1,6 @@
 package br.com.contratei.controller;
 
-import br.com.contratei.dto.CommentDto;
-import br.com.contratei.dto.CoreProviderDto;
-import br.com.contratei.dto.PhotoDto;
-import br.com.contratei.dto.ProviderUserDto;
+import br.com.contratei.dto.*;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
@@ -39,8 +36,8 @@ public class ProviderController {
     }
 
     @GetMapping()
-    public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType) {
-        return service.findPageable(page, size, serviceType);
+    public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType, @RequestParam int consumerId) {
+        return service.findPageable(page, size, serviceType, consumerId);
     }
 
     @PutMapping("/{providerId}")

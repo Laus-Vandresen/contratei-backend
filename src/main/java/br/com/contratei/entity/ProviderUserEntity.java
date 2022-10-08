@@ -52,6 +52,10 @@ public class ProviderUserEntity {
     @JoinColumn(name="provider_id")
     private List<CommentEntity> comments;
 
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name="provider_id")
+    private List<AddressEntity> address;
+
     public void updateScore(Double score) {
         this.score = score;
     }

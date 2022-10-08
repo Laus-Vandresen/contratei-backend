@@ -12,6 +12,8 @@ public interface AddressService {
 
     List<AddressDto> findAllByProviderId(int providerId);
 
+    AddressDto findMainByConsumerId(int providerId);
+
     void deleteById(int id);
 
     void changeAddress(int providerId, AddressDto addres);

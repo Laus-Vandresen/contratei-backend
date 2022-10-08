@@ -14,7 +14,7 @@ public class ConsumerController {
     @Autowired
     private ConsumerService service;
 
-    @PostMapping("create-comment")
+    @PostMapping("/create-comment")
     public void createComment(@RequestBody CommentDto comment) {
         service.createComment(comment);
     }
@@ -24,7 +24,7 @@ public class ConsumerController {
         return service.changeConsumerUser(consumerId, coreConsumer);
     }
 
-    @GetMapping("find-by-id")
+    @GetMapping("/find-by-id")
     public ConsumerUserDto findById(@RequestParam int consumerId) {
         return service.findById(consumerId);
     }

@@ -52,8 +52,8 @@ public class LoginController {
     }
 
     @GetMapping("/find-provider")
-    public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType) {
-        return providerService.findPageable(page, size, serviceType);
+    public Page<ProviderUserDto> find(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) ServiceTypeEnum serviceType, @RequestParam(required = false) int consumerId) {
+        return providerService.findPageable(page, size, serviceType, consumerId);
     }
 
     @GetMapping("/find-provider-by-id")
