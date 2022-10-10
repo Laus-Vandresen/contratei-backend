@@ -57,7 +57,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType, int consumerId) {
+    public Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType, Integer consumerId) {
         if (Objects.nonNull(consumerId)) {
             var consumerAddres = addressService.findMainByConsumerId(consumerId);
             return repository.findPageable(PageRequest.of(page, size), serviceType, consumerAddres);

@@ -17,7 +17,7 @@ public interface ProviderService {
 
     ProviderUserDto findById(int id);
 
-    Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType, int consumerId);
+    Page<ProviderUserDto> findPageable(int page, int size, ServiceTypeEnum serviceType, Integer consumerId);
 
     void recalculateScore(int providerId);
 

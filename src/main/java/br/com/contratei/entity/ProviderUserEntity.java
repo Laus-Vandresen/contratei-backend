@@ -71,6 +71,7 @@ public class ProviderUserEntity {
         this.actingRegion = dto.getActingRegion();
         this.profilePicture = dto.getProfilePicture();
         this.backgroundImage = dto.getBackgroundImage();
+        this.pictures = dto.getPictures().stream().map(PhotoEntity::new).collect(Collectors.toList());
     }
 
     public ProviderUserEntity(ProviderUserDto usuario) {
