@@ -23,5 +23,7 @@ public interface ProviderService {
 
     ProviderUserDto changeProviderUser(int providerId, CoreProviderDto coreProvider);
 
+    void changeProviderPhotos(int providerId, List<PhotoDto> photos);
+
     List<PhotoDto> findPhotosProvider(int providerId);
 }

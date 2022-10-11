@@ -23,5 +23,4 @@ public class CoreProviderDto {
     private ActingRegionEnum actingRegion;
     private byte[] profilePicture;
     private byte[] backgroundImage;
-    private List<PhotoDto> pictures;
 }

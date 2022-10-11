@@ -10,4 +10,6 @@ import java.util.List;
 public interface PhotoRepository extends JpaRepository<PhotoEntity, Integer> {
 
     List<PhotoEntity> findAllByProviderId(int providerId);
+
+    void deleteAllByProviderId(int providerId);
 }

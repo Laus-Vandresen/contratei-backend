@@ -45,6 +45,11 @@ public class ProviderController {
         return service.changeProviderUser(providerId, coreProvider);
     }
 
+    @PutMapping("/change-fotos/{providerId}")
+    public void changeProviderUser(@PathVariable  int providerId, @RequestBody List<PhotoDto> photos) {
+        service.changeProviderPhotos(providerId, photos);
+    }
+
     @GetMapping("/find-comment-by-provider")
     public Page<CommentDto> findByProviderId(@RequestParam int page, @RequestParam int size, @RequestParam int providerId) {
         return commentService.findByProviderId(page, size, providerId);

@@ -5,6 +5,7 @@ import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.entity.CommentEntity;
+import br.com.contratei.entity.PhotoEntity;
 import br.com.contratei.entity.ProviderUserEntity;
 import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.ProviderUserRepository;
@@ -86,6 +87,13 @@ public class ProviderServiceImpl implements ProviderService {
             return new ProviderUserDto(repository.save(entity.get()));
         }
         return null;
+    }
+
+    @Override
+    public void changeProviderPhotos(int providerId, List<PhotoDto> photos) {
+        var photosEntity = photos.stream().map(PhotoEntity::new).collect(Collectors.toList());
+        photoService.deleteAllByProvider(providerId);
+        photoService.saveAll(photosEntity);
     }
 
     @Override
