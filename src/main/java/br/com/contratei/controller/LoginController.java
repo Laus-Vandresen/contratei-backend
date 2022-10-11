@@ -2,6 +2,7 @@ package br.com.contratei.controller;
 
 import br.com.contratei.dto.*;
 import br.com.contratei.enuns.ServiceTypeEnum;
+import br.com.contratei.service.AddressService;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
 import br.com.contratei.service.impl.LoginServiceImpl;
@@ -24,6 +25,9 @@ public class LoginController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private AddressService addressService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDto authenticatioRequest) throws Exception {
@@ -64,5 +68,10 @@ public class LoginController {
     @GetMapping("/find-comment-by-provider")
     public Page<CommentDto> findByProviderId(@RequestParam int page, @RequestParam int size, @RequestParam int providerId) {
         return commentService.findByProviderId(page, size, providerId);
+    }
+
+    @GetMapping("/find-provider-main-address")
+    public AddressDto findMainAddres(@RequestParam int providerId) {
+        return addressService.findByProviderIdAndMainIsTrue(providerId);
     }
 }

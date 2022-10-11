@@ -38,6 +38,12 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public AddressDto findByProviderIdAndMainIsTrue(int providerId) {
+        var addressEntity = repository.findByProviderIdAndMainIsTrue(providerId);
+        return new AddressDto(addressEntity);
+    }
+
+    @Override
     public void deleteById(int id) {
         repository.deleteById(id);
     }

@@ -12,7 +12,9 @@ public interface AddressService {
 
     List<AddressDto> findAllByProviderId(int providerId);
 
-    AddressDto findMainByConsumerId(int providerId);
+    AddressDto findMainByConsumerId(int consumerId);
+
+    AddressDto findByProviderIdAndMainIsTrue(int providerId);
 
     void deleteById(int id);
 

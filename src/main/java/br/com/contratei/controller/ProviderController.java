@@ -2,6 +2,7 @@ package br.com.contratei.controller;
 
 import br.com.contratei.dto.*;
 import br.com.contratei.enuns.ServiceTypeEnum;
+import br.com.contratei.service.AddressService;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ProviderController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private AddressService addressService;
 
     @GetMapping("/name")
     public List<ProviderUserDto> findByName(@RequestParam String prefix) {
@@ -58,6 +62,11 @@ public class ProviderController {
     @GetMapping("/find-photos-provider")
     public List<PhotoDto> findPhotosProvider(@RequestParam int providerId) {
         return service.findPhotosProvider(providerId);
+    }
+
+    @GetMapping("/find-main-address")
+    public AddressDto findMainAddres(@RequestParam int providerId) {
+        return addressService.findByProviderIdAndMainIsTrue(providerId);
     }
 
 }

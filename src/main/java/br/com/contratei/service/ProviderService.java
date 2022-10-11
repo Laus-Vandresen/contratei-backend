@@ -1,6 +1,5 @@
 package br.com.contratei.service;
 
-import br.com.contratei.dto.AddressDto;
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
