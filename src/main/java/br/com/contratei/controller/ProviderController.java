@@ -46,8 +46,8 @@ public class ProviderController {
     }
 
     @PutMapping("/change-photos/{providerId}")
-    public void changeProviderUser(@PathVariable  int providerId, @RequestBody List<PhotoDto> photos) {
-        service.changeProviderPhotos(providerId, photos);
+    public void changeProviderUser(@PathVariable  int providerId, @RequestBody PhotosDto photos) {
+        service.changeProviderPhotos(providerId, photos.getPhotos());
     }
 
     @GetMapping("/find-comment-by-provider")
