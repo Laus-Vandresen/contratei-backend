@@ -45,7 +45,7 @@ public class ProviderController {
         return service.changeProviderUser(providerId, coreProvider);
     }
 
-    @PutMapping("/change-fotos/{providerId}")
+    @PutMapping("/change-photos/{providerId}")
     public void changeProviderUser(@PathVariable  int providerId, @RequestBody List<PhotoDto> photos) {
         service.changeProviderPhotos(providerId, photos);
     }
