@@ -48,7 +48,7 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public Page<BudgetDto> findOpenBudgets(int page, int size, int providerId, PriorityLevelEnum priorityLevel) {
         var provider = providerService.findById(providerId);
-        return repository.findOpenBudgets(PageRequest.of(page, size), provider.getServiceType(), priorityLevel);
+        return repository.findOpenBudgets(PageRequest.of(page, size), provider, priorityLevel);
     }
 
     @Override

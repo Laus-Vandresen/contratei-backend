@@ -1,9 +1,8 @@
 package br.com.contratei.repository.impl;
 
 import br.com.contratei.dto.BudgetDto;
-import br.com.contratei.entity.QBudgetEntity;
-import br.com.contratei.entity.QConsumerUserEntity;
-import br.com.contratei.entity.QProviderUserEntity;
+import br.com.contratei.entity.*;
+import br.com.contratei.enuns.ActingRegionEnum;
 import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.enuns.PriorityLevelEnum;
 import br.com.contratei.enuns.ServiceTypeEnum;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
 
@@ -80,16 +80,28 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
     }
 
     @Override
-    public Page<BudgetDto> findOpenBudgets(Pageable page, ServiceTypeEnum serviceType, PriorityLevelEnum priorityLevel) {
+    public Page<BudgetDto> findOpenBudgets(Pageable page, ProviderUserEntity providerUser, PriorityLevelEnum priorityLevel) {
         final QBudgetEntity budgetEntity = QBudgetEntity.budgetEntity;
+        final QConsumerUserEntity consumerUserEntity = QConsumerUserEntity.consumerUserEntity;
+        final QAddressEntity addressEntity = QAddressEntity.addressEntity;
 
         BooleanBuilder predicate = new BooleanBuilder();
 
         predicate.and(budgetEntity.status.eq(BudgetStatusEnum.OPEN));
         predicate.and(budgetEntity.provider.isNull());
 
-        if (Objects.nonNull(serviceType)) {
-            predicate.and(budgetEntity.serviceType.eq(serviceType));
+        if (Objects.nonNull(providerUser)) {
+            if (Objects.nonNull(providerUser.getServiceType())) {
+                predicate.and(budgetEntity.serviceType.eq(providerUser.getServiceType()));
+            }
+            var mainAddressProvider = providerUser.getAddress().stream().filter(address -> address.getMain().equals(Boolean.TRUE)).collect(Collectors.toList()).get(0);
+            if (providerUser.getActingRegion().equals(ActingRegionEnum.DISTRICT)) {
+                predicate.and(addressEntity.district.eq(mainAddressProvider.getDistrict()));
+            } else if (providerUser.getActingRegion().equals(ActingRegionEnum.CITY)) {
+                predicate.and(addressEntity.city.eq(mainAddressProvider.getCity()));
+            } else if (providerUser.getActingRegion().equals(ActingRegionEnum.STATE)) {
+                predicate.and(addressEntity.state.eq(mainAddressProvider.getState()));
+            }
         }
 
         if (Objects.nonNull(priorityLevel)) {
@@ -100,6 +112,8 @@ public class CustomBudgetRepositoryImpl implements CustomBudgetRepository {
         query.select(Projections.constructor(BudgetDto.class,
                         budgetEntity))
                 .from(budgetEntity)
+                .join(budgetEntity.consumer, consumerUserEntity)
+                .join(consumerUserEntity.address, addressEntity)
                 .where(predicate)
                 .orderBy(budgetEntity.id.desc());
 

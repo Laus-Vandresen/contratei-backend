@@ -54,8 +54,8 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public ProviderUserDto findById(int id) {
-        return new ProviderUserDto(repository.findById(id).orElse(null));
+    public ProviderUserEntity findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override

@@ -62,7 +62,8 @@ public class LoginController {
 
     @GetMapping("/find-provider-by-id")
     public ProviderUserDto findById(@RequestParam int id) {
-        return providerService.findById(id);
+        var providerEntity = providerService.findById(id);
+        return new ProviderUserDto(providerEntity);
     }
 
     @GetMapping("/find-comment-by-provider")

@@ -36,7 +36,8 @@ public class ProviderController {
 
     @GetMapping("/find-by-id")
     public ProviderUserDto findById(@RequestParam int id) {
-        return service.findById(id);
+        var providerEntity = service.findById(id);
+        return new ProviderUserDto(providerEntity);
     }
 
     @GetMapping()
