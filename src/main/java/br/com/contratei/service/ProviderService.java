@@ -26,4 +26,8 @@ public interface ProviderService {
     void changeProviderPhotos(int providerId, List<PhotoDto> photos);
 
     List<PhotoDto> findPhotosProvider(int providerId);
+
+    List<ProviderUserDto> findRandomProviders();
+
+    List<ProviderUserDto> findNewProviders();
 }

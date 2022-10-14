@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Objects;
 
 public class CustomProviderUserRepositoryImpl implements CustomProviderUserRepository {
@@ -54,5 +55,32 @@ public class CustomProviderUserRepositoryImpl implements CustomProviderUserRepos
         query.offset(page.getOffset());
 
         return new PageImpl<>(query.fetch(), page, query.fetchCount());
+    }
+
+    @Override
+    public List<ProviderUserDto> findRandomProviders() {
+        final QProviderUserEntity providerUserEntity = QProviderUserEntity.providerUserEntity;
+
+        JPAQuery<ProviderUserDto> query = new JPAQuery<>(em);
+        query.select(Projections.constructor(ProviderUserDto.class,
+                        providerUserEntity))
+                .from(providerUserEntity)
+                .limit(5L);
+
+        return query.fetch();
+    }
+
+    @Override
+    public List<ProviderUserDto> findNewProviders() {
+        final QProviderUserEntity providerUserEntity = QProviderUserEntity.providerUserEntity;
+
+        JPAQuery<ProviderUserDto> query = new JPAQuery<>(em);
+        query.select(Projections.constructor(ProviderUserDto.class,
+                        providerUserEntity))
+                .from(providerUserEntity)
+                .limit(5L)
+                .orderBy(providerUserEntity.id.desc());
+
+        return query.fetch();
     }
 }

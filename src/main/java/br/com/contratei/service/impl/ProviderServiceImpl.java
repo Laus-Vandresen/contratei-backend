@@ -102,4 +102,14 @@ public class ProviderServiceImpl implements ProviderService {
     public List<PhotoDto> findPhotosProvider(int providerId) {
         return photoService.findPhotosProvider(providerId);
     }
+
+    @Override
+    public List<ProviderUserDto> findRandomProviders() {
+        return repository.findRandomProviders();
+    }
+
+    @Override
+    public List<ProviderUserDto> findNewProviders() {
+        return repository.findNewProviders();
+    }
 }

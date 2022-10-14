@@ -70,4 +70,13 @@ public class ProviderController {
         return addressService.findByProviderIdAndMainIsTrue(providerId);
     }
 
+    @GetMapping("/random-providers")
+    public List<ProviderUserDto> findRandomProviders() {
+        return service.findRandomProviders();
+    }
+
+    @GetMapping("/new-providers")
+    public List<ProviderUserDto> findNewProviders() {
+        return service.findNewProviders();
+    }
 }
