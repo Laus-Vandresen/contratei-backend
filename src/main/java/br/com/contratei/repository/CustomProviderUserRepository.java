@@ -12,7 +12,9 @@ public interface CustomProviderUserRepository {
 
     Page<ProviderUserDto> findPageable(Pageable page, ServiceTypeEnum serviceType, AddressDto consumerAddres);
 
-    List<ProviderUserDto> findRandomProviders();
+    List<ProviderUserDto> findRandomProviders(AddressDto consumerAddres);
 
-    List<ProviderUserDto> findNewProviders();
+    List<ProviderUserDto> findNewProviders(AddressDto consumerAddres);
+
+    List<ProviderUserDto> findBetterProviders(AddressDto consumerAddres);
 }

@@ -1,8 +1,6 @@
 package br.com.contratei.controller;
 
 import br.com.contratei.dto.AddressDto;
-import br.com.contratei.dto.CoreProviderDto;
-import br.com.contratei.dto.ProviderUserDto;
 import br.com.contratei.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

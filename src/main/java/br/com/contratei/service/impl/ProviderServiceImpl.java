@@ -1,6 +1,5 @@
 package br.com.contratei.service.impl;
 
-import br.com.contratei.dto.AddressDto;
 import br.com.contratei.dto.CoreProviderDto;
 import br.com.contratei.dto.PhotoDto;
 import br.com.contratei.dto.ProviderUserDto;
@@ -104,12 +103,32 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProviderUserDto> findRandomProviders() {
-        return repository.findRandomProviders();
+    public List<ProviderUserDto> findRandomProviders(int consumerId) {
+        if (Objects.nonNull(consumerId)) {
+            var consumerAddres = addressService.findMainByConsumerId(consumerId);
+            return repository.findRandomProviders(consumerAddres);
+        } else {
+            return repository.findRandomProviders(null);
+        }
     }
 
     @Override
-    public List<ProviderUserDto> findNewProviders() {
-        return repository.findNewProviders();
+    public List<ProviderUserDto> findNewProviders(int consumerId) {
+        if (Objects.nonNull(consumerId)) {
+            var consumerAddres = addressService.findMainByConsumerId(consumerId);
+            return repository.findNewProviders(consumerAddres);
+        } else {
+            return repository.findNewProviders(null);
+        }
+    }
+
+    @Override
+    public List<ProviderUserDto> findBetterProviders(int consumerId) {
+        if (Objects.nonNull(consumerId)) {
+            var consumerAddres = addressService.findMainByConsumerId(consumerId);
+            return repository.findBetterProviders(consumerAddres);
+        } else {
+            return repository.findBetterProviders(null);
+        }
     }
 }

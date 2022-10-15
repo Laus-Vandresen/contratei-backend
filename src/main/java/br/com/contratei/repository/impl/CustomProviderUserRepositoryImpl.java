@@ -58,28 +58,84 @@ public class CustomProviderUserRepositoryImpl implements CustomProviderUserRepos
     }
 
     @Override
-    public List<ProviderUserDto> findRandomProviders() {
+    public List<ProviderUserDto> findRandomProviders(AddressDto consumerAddres) {
         final QProviderUserEntity providerUserEntity = QProviderUserEntity.providerUserEntity;
+        final QAddressEntity addressEntity = QAddressEntity.addressEntity;
+
+        BooleanBuilder where = new BooleanBuilder();
+
+        if (Objects.nonNull(consumerAddres)) {
+            where.and(addressEntity.main.isTrue());
+            where.and((providerUserEntity.actingRegion.eq(ActingRegionEnum.DISTRICT).and(addressEntity.district.eq(consumerAddres.getDistrict())))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.CITY).and(addressEntity.city.eq(consumerAddres.getCity()))))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.STATE).and(addressEntity.state.eq(consumerAddres.getState()))))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.COUNTRY)))
+            );
+        }
 
         JPAQuery<ProviderUserDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(ProviderUserDto.class,
                         providerUserEntity))
                 .from(providerUserEntity)
+                .join(providerUserEntity.address, addressEntity)
+                .where(where)
                 .limit(5L);
 
         return query.fetch();
     }
 
     @Override
-    public List<ProviderUserDto> findNewProviders() {
+    public List<ProviderUserDto> findNewProviders(AddressDto consumerAddres) {
         final QProviderUserEntity providerUserEntity = QProviderUserEntity.providerUserEntity;
+        final QAddressEntity addressEntity = QAddressEntity.addressEntity;
+
+        BooleanBuilder where = new BooleanBuilder();
+
+        if (Objects.nonNull(consumerAddres)) {
+            where.and(addressEntity.main.isTrue());
+            where.and((providerUserEntity.actingRegion.eq(ActingRegionEnum.DISTRICT).and(addressEntity.district.eq(consumerAddres.getDistrict())))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.CITY).and(addressEntity.city.eq(consumerAddres.getCity()))))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.STATE).and(addressEntity.state.eq(consumerAddres.getState()))))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.COUNTRY)))
+            );
+        }
 
         JPAQuery<ProviderUserDto> query = new JPAQuery<>(em);
         query.select(Projections.constructor(ProviderUserDto.class,
                         providerUserEntity))
                 .from(providerUserEntity)
+                .join(providerUserEntity.address, addressEntity)
+                .where(where)
                 .limit(5L)
                 .orderBy(providerUserEntity.id.desc());
+
+        return query.fetch();
+    }
+
+    @Override
+    public List<ProviderUserDto> findBetterProviders(AddressDto consumerAddres) {
+        final QProviderUserEntity providerUserEntity = QProviderUserEntity.providerUserEntity;
+        final QAddressEntity addressEntity = QAddressEntity.addressEntity;
+
+        BooleanBuilder where = new BooleanBuilder();
+
+        if (Objects.nonNull(consumerAddres)) {
+            where.and(addressEntity.main.isTrue());
+            where.and((providerUserEntity.actingRegion.eq(ActingRegionEnum.DISTRICT).and(addressEntity.district.eq(consumerAddres.getDistrict())))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.CITY).and(addressEntity.city.eq(consumerAddres.getCity()))))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.STATE).and(addressEntity.state.eq(consumerAddres.getState()))))
+                    .or((providerUserEntity.actingRegion.eq(ActingRegionEnum.COUNTRY)))
+            );
+        }
+
+        JPAQuery<ProviderUserDto> query = new JPAQuery<>(em);
+        query.select(Projections.constructor(ProviderUserDto.class,
+                        providerUserEntity))
+                .from(providerUserEntity)
+                .join(providerUserEntity.address, addressEntity)
+                .where(where)
+                .limit(5L)
+                .orderBy(providerUserEntity.score.desc());
 
         return query.fetch();
     }

@@ -1,8 +1,6 @@
 package br.com.contratei.entity;
 
 import br.com.contratei.dto.CommentDto;
-import br.com.contratei.dto.ConsumerUserDto;
-import br.com.contratei.dto.ProviderUserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

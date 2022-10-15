@@ -5,7 +5,6 @@ import br.com.contratei.entity.*;
 import br.com.contratei.enuns.ActingRegionEnum;
 import br.com.contratei.enuns.BudgetStatusEnum;
 import br.com.contratei.enuns.PriorityLevelEnum;
-import br.com.contratei.enuns.ServiceTypeEnum;
 import br.com.contratei.repository.CustomBudgetRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
@@ -13,7 +12,6 @@ import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

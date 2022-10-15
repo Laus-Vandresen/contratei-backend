@@ -3,10 +3,7 @@ package br.com.contratei.service.impl;
 import br.com.contratei.dto.CommentDto;
 import br.com.contratei.dto.ConsumerUserDto;
 import br.com.contratei.dto.CoreConsumerDto;
-import br.com.contratei.dto.ProviderUserDto;
-import br.com.contratei.entity.CommentEntity;
 import br.com.contratei.entity.ConsumerUserEntity;
-import br.com.contratei.entity.ProviderUserEntity;
 import br.com.contratei.repository.ConsumerUserRepository;
 import br.com.contratei.service.CommentService;
 import br.com.contratei.service.ConsumerService;
@@ -15,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
