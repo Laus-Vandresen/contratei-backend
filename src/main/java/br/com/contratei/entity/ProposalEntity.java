@@ -30,6 +30,15 @@ public class ProposalEntity {
 
     private String description;
     private BigDecimal averageValue;
+    private Boolean accepted;
+
+    public void acceptProposal() {
+        this.accepted = Boolean.TRUE;
+    }
+
+    public void refuseProposal() {
+        this.accepted = Boolean.FALSE;
+    }
 
     public ProposalEntity(ProposalDto dto) {
         this.id = dto.getId();
@@ -37,5 +46,6 @@ public class ProposalEntity {
         this.budget = Objects.nonNull(dto.getBudget()) ? new BudgetEntity(dto.getBudget()) : null;
         this.description = dto.getDescription();
         this.averageValue = dto.getAverageValue();
+        this.accepted = dto.getAccepted();
     }
 }

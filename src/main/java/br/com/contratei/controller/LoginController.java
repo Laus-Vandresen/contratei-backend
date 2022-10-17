@@ -75,4 +75,19 @@ public class LoginController {
     public AddressDto findMainAddres(@RequestParam int providerId) {
         return addressService.findByProviderIdAndMainIsTrue(providerId);
     }
+
+    @GetMapping("/random-providers")
+    public List<ProviderUserDto> findRandomProviders(@RequestParam int consumerId) {
+        return providerService.findRandomProviders(consumerId);
+    }
+
+    @GetMapping("/new-providers")
+    public List<ProviderUserDto> findNewProviders(@RequestParam int consumerId) {
+        return providerService.findNewProviders(consumerId);
+    }
+
+    @GetMapping("/better-providers")
+    public List<ProviderUserDto> findBetterProviders(@RequestParam int consumerId) {
+        return providerService.findBetterProviders(consumerId);
+    }
 }

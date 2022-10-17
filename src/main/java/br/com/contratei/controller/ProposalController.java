@@ -5,6 +5,8 @@ import br.com.contratei.service.ProposalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/proposal")
 public class ProposalController {
@@ -17,8 +19,18 @@ public class ProposalController {
         service.save(proposalDto);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteProposal(@PathVariable int id) {
-        service.deleteProposal(id);
+    @GetMapping()
+    public ProposalDto findById(@RequestParam int id) {
+        return service.findById(id);
+    }
+
+    @GetMapping("find-by-budget")
+    public List<ProposalDto> findAllByBudget(@RequestParam int budgetId) {
+        return service.findAllByBudget(budgetId);
+    }
+
+    @PostMapping("accept-proposal")
+    public void acceptProposal(@RequestParam int proposalId, @RequestParam int budgetId) {
+        service.acceptProposal(proposalId, budgetId);
     }
 }
