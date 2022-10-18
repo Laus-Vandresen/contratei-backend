@@ -103,7 +103,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProviderUserDto> findRandomProviders(int consumerId) {
+    public List<ProviderUserDto> findRandomProviders(Integer consumerId) {
         if (Objects.nonNull(consumerId)) {
             var consumerAddres = addressService.findMainByConsumerId(consumerId);
             return repository.findRandomProviders(consumerAddres);
@@ -113,7 +113,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProviderUserDto> findNewProviders(int consumerId) {
+    public List<ProviderUserDto> findNewProviders(Integer consumerId) {
         if (Objects.nonNull(consumerId)) {
             var consumerAddres = addressService.findMainByConsumerId(consumerId);
             return repository.findNewProviders(consumerAddres);
@@ -123,7 +123,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public List<ProviderUserDto> findBetterProviders(int consumerId) {
+    public List<ProviderUserDto> findBetterProviders(Integer consumerId) {
         if (Objects.nonNull(consumerId)) {
             var consumerAddres = addressService.findMainByConsumerId(consumerId);
             return repository.findBetterProviders(consumerAddres);

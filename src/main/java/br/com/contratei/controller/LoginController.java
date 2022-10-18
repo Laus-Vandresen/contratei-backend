@@ -77,17 +77,17 @@ public class LoginController {
     }
 
     @GetMapping("/random-providers")
-    public List<ProviderUserDto> findRandomProviders(@RequestParam int consumerId) {
+    public List<ProviderUserDto> findRandomProviders(@RequestParam(required = false) Integer consumerId) {
         return providerService.findRandomProviders(consumerId);
     }
 
     @GetMapping("/new-providers")
-    public List<ProviderUserDto> findNewProviders(@RequestParam int consumerId) {
+    public List<ProviderUserDto> findNewProviders(@RequestParam(required = false) Integer consumerId) {
         return providerService.findNewProviders(consumerId);
     }
 
     @GetMapping("/better-providers")
-    public List<ProviderUserDto> findBetterProviders(@RequestParam int consumerId) {
+    public List<ProviderUserDto> findBetterProviders(@RequestParam(required = false) Integer consumerId) {
         return providerService.findBetterProviders(consumerId);
     }
 }
