@@ -27,9 +27,9 @@ public interface ProviderService {
 
     List<PhotoDto> findPhotosProvider(int providerId);
 
-    List<ProviderUserDto> findRandomProviders(int consumerId);
+    List<ProviderUserDto> findRandomProviders(Integer consumerId);
 
-    List<ProviderUserDto> findNewProviders(int consumerId);
+    List<ProviderUserDto> findNewProviders(Integer consumerId);
 
-    List<ProviderUserDto> findBetterProviders(int consumerId);
+    List<ProviderUserDto> findBetterProviders(Integer consumerId);
 }
