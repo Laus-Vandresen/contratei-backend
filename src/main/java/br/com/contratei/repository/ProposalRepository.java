@@ -12,4 +12,6 @@ public interface ProposalRepository extends JpaRepository<ProposalEntity, Intege
     List<ProposalEntity> findAllByBudgetId(int budgetId);
 
     List<ProposalEntity> findAllByBudgetIdAndIdIsNot(int budgetId, int id);
+
+    ProposalEntity findByProviderIdAndBudgetId(int providerId, int budgetId);
 }

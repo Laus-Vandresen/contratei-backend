@@ -5,12 +5,12 @@ import br.com.contratei.entity.ProposalEntity;
 import br.com.contratei.repository.ProposalRepository;
 import br.com.contratei.service.BudgetService;
 import br.com.contratei.service.ProposalService;
-import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,6 +51,15 @@ public class ProposalServiceImpl implements ProposalService {
             budgetService.save(budget);
             denyOtherProposals(proposalId, budgetId);
         }
+    }
+
+    @Override
+    public ProposalDto findExistingProposal(int providerId, int budgetId) {
+        var proposal = repository.findByProviderIdAndBudgetId(providerId, budgetId);
+        if (Objects.nonNull(proposal)) {
+            return new ProposalDto(proposal);
+        }
+        return null;
     }
 
     private void denyOtherProposals(int proposalId, int budgetId) {

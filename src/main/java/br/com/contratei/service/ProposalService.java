@@ -13,4 +13,6 @@ public interface ProposalService {
     List<ProposalDto> findAllByBudget(int budgetId);
 
     void acceptProposal(int proposalId, int budgetId);
+
+    ProposalDto findExistingProposal(int providerId, int budgetId);
 }

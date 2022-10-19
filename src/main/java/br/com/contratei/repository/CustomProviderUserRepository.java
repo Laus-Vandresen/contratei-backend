@@ -17,4 +17,6 @@ public interface CustomProviderUserRepository {
     List<ProviderUserDto> findNewProviders(AddressDto consumerAddres);
 
     List<ProviderUserDto> findBetterProviders(AddressDto consumerAddres);
+
+
 }

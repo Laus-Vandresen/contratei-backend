@@ -33,4 +33,9 @@ public class ProposalController {
     public void acceptProposal(@RequestParam int proposalId, @RequestParam int budgetId) {
         service.acceptProposal(proposalId, budgetId);
     }
+
+    @GetMapping("find-existing-proposal")
+    public ProposalDto findExistingProposal(@RequestParam int providerId, @RequestParam int budgetId) {
+        return service.findExistingProposal(providerId, budgetId);
+    }
 }
