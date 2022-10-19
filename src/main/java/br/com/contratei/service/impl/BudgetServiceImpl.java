@@ -24,13 +24,18 @@ public class BudgetServiceImpl implements BudgetService {
     private ProviderService providerService;
 
     @Override
-    public BudgetDto findById(Integer id) {
-        return new BudgetDto(repository.findById(id).orElse(null));
+    public BudgetEntity findById(Integer id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public BudgetEntity save(BudgetDto dto) {
         return repository.save(new BudgetEntity(dto));
+    }
+
+    @Override
+    public void save(BudgetEntity entity) {
+        repository.save(entity);
     }
 
     @Override

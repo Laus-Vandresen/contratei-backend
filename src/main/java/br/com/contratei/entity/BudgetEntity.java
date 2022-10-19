@@ -7,6 +7,7 @@ import br.com.contratei.enuns.ServiceTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -70,5 +71,10 @@ public class BudgetEntity {
         this.completionDate = dto.getCompletionDate();
         this.consumer = Objects.nonNull(dto.getConsumer()) ? new ConsumerUserEntity(dto.getConsumer()) : null;
         this.provider = Objects.nonNull(dto.getProvider()) ?  new ProviderUserEntity(dto.getProvider()) : null;
+    }
+
+    public void acceptProposal(ProviderUserEntity provider) {
+        this.provider = provider;
+        this.status = BudgetStatusEnum.IN_PROGRESS;
     }
 }

@@ -17,7 +17,7 @@ public class BudgetController {
 
     @GetMapping
     public BudgetDto findById(@RequestParam Integer id) {
-        return service.findById(id);
+        return new BudgetDto(service.findById(id));
     }
 
     @GetMapping("/find-by-consumer")

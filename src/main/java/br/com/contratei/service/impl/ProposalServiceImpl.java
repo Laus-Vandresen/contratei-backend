@@ -3,11 +3,13 @@ package br.com.contratei.service.impl;
 import br.com.contratei.dto.ProposalDto;
 import br.com.contratei.entity.ProposalEntity;
 import br.com.contratei.repository.ProposalRepository;
+import br.com.contratei.service.BudgetService;
 import br.com.contratei.service.ProposalService;
 import br.com.contratei.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +20,7 @@ public class ProposalServiceImpl implements ProposalService {
     private ProposalRepository repository;
 
     @Autowired
-    private ProviderService providerService;
+    private BudgetService budgetService;
 
     @Override
     public void save(ProposalDto proposalDto) {
@@ -38,14 +40,22 @@ public class ProposalServiceImpl implements ProposalService {
     }
 
     @Override
+    @Transactional
     public void acceptProposal(int proposalId, int budgetId) {
         var proposal = repository.findById(proposalId);
         if (proposal.isPresent()) {
+            var budget = budgetService.findById(budgetId);
             proposal.get().acceptProposal();
+            budget.acceptProposal(proposal.get().getProvider());
             repository.save(proposal.get());
-            var proposalsNotAccepted = repository.findAllByBudgetIdAndIdIsNot(budgetId, proposalId);
-            proposalsNotAccepted.forEach(ProposalEntity::refuseProposal);
-            repository.saveAll(proposalsNotAccepted);
+            budgetService.save(budget);
+            denyOtherProposals(proposalId, budgetId);
         }
+    }
+
+    private void denyOtherProposals(int proposalId, int budgetId) {
+        var proposalsNotAccepted = repository.findAllByBudgetIdAndIdIsNot(budgetId, proposalId);
+        proposalsNotAccepted.forEach(ProposalEntity::refuseProposal);
+        repository.saveAll(proposalsNotAccepted);
     }
 }
