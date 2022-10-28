@@ -73,8 +73,9 @@ public class BudgetEntity {
         this.provider = Objects.nonNull(dto.getProvider()) ?  new ProviderUserEntity(dto.getProvider()) : null;
     }
 
-    public void acceptProposal(ProviderUserEntity provider) {
-        this.provider = provider;
+    public void acceptProposal(ProposalEntity proposal) {
+        this.provider = proposal.getProvider();
+        this.value = proposal.getAverageValue();
         this.status = BudgetStatusEnum.IN_PROGRESS;
     }
 }

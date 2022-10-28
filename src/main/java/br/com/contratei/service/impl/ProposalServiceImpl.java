@@ -46,7 +46,7 @@ public class ProposalServiceImpl implements ProposalService {
         if (proposal.isPresent()) {
             var budget = budgetService.findById(budgetId);
             proposal.get().acceptProposal();
-            budget.acceptProposal(proposal.get().getProvider());
+            budget.acceptProposal(proposal.get());
             repository.save(proposal.get());
             budgetService.save(budget);
             denyOtherProposals(proposalId, budgetId);
