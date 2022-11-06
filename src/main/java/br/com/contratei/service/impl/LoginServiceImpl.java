@@ -44,11 +44,11 @@ public class LoginServiceImpl implements UserDetailsService {
         List<ConsumerUserEntity> consumerUserEntityList = consumerUserRepository.findByEmail(email);
         List<ProviderUserEntity> providerUserEntityList = providerUserRepository.findByEmail(email);
         if (consumerUserEntityList.size() == 0 && providerUserEntityList.size() == 0) {
-            throw new UsernameNotFoundException("User details not found for the user : " + email);
+            return new CustomUserDetails(null, null, "User details not found for the user: " + email);
         } else if (consumerUserEntityList.size() != 0 && providerUserEntityList.size() == 0) {
-            return new CustomUserDetails(consumerUserEntityList.get(0), null);
+            return new CustomUserDetails(consumerUserEntityList.get(0), null, "");
         } else {
-            return new CustomUserDetails(null, providerUserEntityList.get(0));
+            return new CustomUserDetails(null, providerUserEntityList.get(0), "");
         }
     }
 

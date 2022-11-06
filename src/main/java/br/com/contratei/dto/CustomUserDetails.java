@@ -9,15 +9,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+
 public class CustomUserDetails implements UserDetails {
 
     private final ConsumerUserEntity consumerUserEntity;
 
     private final ProviderUserEntity providerUserEntity;
 
-    public CustomUserDetails(ConsumerUserEntity consumerUserEntity, ProviderUserEntity providerUserEntity) {
+    private final String error;
+
+    public CustomUserDetails(ConsumerUserEntity consumerUserEntity, ProviderUserEntity providerUserEntity, String error) {
         this.consumerUserEntity = consumerUserEntity;
         this.providerUserEntity = providerUserEntity;
+        this.error = error;
     }
 
     @Override
