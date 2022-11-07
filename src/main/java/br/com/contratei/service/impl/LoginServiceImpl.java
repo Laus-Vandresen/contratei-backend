@@ -76,7 +76,9 @@ public class LoginServiceImpl implements UserDetailsService {
     public UserDto findUserByEmail(String email) {
         List<ConsumerUserEntity> consumerUserEntityList = consumerUserRepository.findByEmail(email);
         List<ProviderUserEntity> providerUserEntityList = providerUserRepository.findByEmail(email);
-        if (!consumerUserEntityList.isEmpty() && providerUserEntityList.isEmpty()) {
+        if (consumerUserEntityList.isEmpty() && providerUserEntityList.isEmpty()) {
+            return new UserDto();
+        } else if (!consumerUserEntityList.isEmpty() && providerUserEntityList.isEmpty()) {
             return new UserDto(consumerUserEntityList.get(0));
         } else {
             return new UserDto(providerUserEntityList.get(0));
